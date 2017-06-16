@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
+   <ShortName>[dhus_short_name]</ShortName>
+   <Description>Search data among the Hubs</Description>
+   <Tags>data,hub,space,earth,observation,sentinel,copernicus</Tags>
+   <Contact>[dhus_contact_mail]</Contact>
+   <Url type="application/rss+xml" template="[dhus_server]/search?q={searchTerms}&amp;start={startIndex?}&amp;row={count?}&amp;orderby={custom:orderby?}"/>
+   <Url type="application/json" template="[dhus_server]/search?q={searchTerms}&amp;start={startIndex?}&amp;row={count?}&amp;format=json"/>
+   <LongName>[dhus_long_name]</LongName>
+   <Query role="example" searchTerms="*" />
+   <Developer>Gael Systems</Developer>
+   <Attribution>
+      <![CDATA[Data Hub Service (DHuS) - For Space data distribution.
+      Copyright (C) 2013,2014,2015,2016,2017 GAEL Systems
+
+      This file is part of DHuS software sources.
+
+      This program is free software: you can redistribute it and/or modify
+      it under the terms of the GNU Affero General Public License as
+      published by the Free Software Foundation, either version 3 of the
+      License, or (at your option) any later version.
+
+      This program is distributed in the hope that it will be useful,
+      but WITHOUT ANY WARRANTY; without even the implied warranty of
+      MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+      GNU Affero General Public License for more details.
+
+      You should have received a copy of the GNU Affero General Public License
+      along with this program. If not, see <http://www.gnu.org/licenses/>.]]>
+   </Attribution>
+   <SyndicationRight>open</SyndicationRight>
+   <AdultContent>false</AdultContent>
+   <Language>en-us</Language>
+   <OutputEncoding>UTF-8</OutputEncoding>
+   <InputEncoding>UTF-8</InputEncoding>
+</OpenSearchDescription>

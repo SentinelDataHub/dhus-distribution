@@ -1,0 +1,250 @@
+# iso_country_name: synonyms separated with ", "
+Afghanistan: د افغانستان اسلامي دولتدولت اسلامی افغانستان ,جمهوری اسلامی افغانستان, Da Afghanestan Islami Jomhouriyet, Jomhūrī-ye Eslāmī-ye Afġānestān
+Åland Islands: Landskapet Åland, Ahvenanmaan maakunta
+Albania: Shqipëri, Republika e Shqipërisë
+Algeria: الجمهورية الجزائرية الديمقراطية الشعبية
+American Samoa: 
+Andorra: Principat d’Andorra
+Angola: República de Angola
+Anguilla: 
+Antarctica: The Antarctic Treaty, Traité sur l’Antarctique, Tratado Antárctico, Договор об Антарктике
+Antigua and Barbuda: 
+Argentina: 
+Armenia: Հայաստան, Hayastan
+Aruba: 
+Australia: 
+Austria: Österreich
+Azerbaijan: Azərbaycan Respublikası
+Bahamas: Commonwealth of the Bahamas
+Bahrain: مملكة البحرين, Mamlakat al-Bahrayn
+Bangladesh: গণপ্রজাতন্ত্রী বাংলাদেশ, Gônoprojatontri Bangladesh
+Barbados: 
+Belarus: Беларусь, Belarusy
+Belgium: Belgique, Royaume de Belgique, Koninkrijk België, België, Königreich Belgien, Belgien
+Belize: 
+Benin: Orílẹ̀-èdè Olómìnira ilẹ̀ Benin
+Bermuda: 
+Bhutan: འབྲུག་ཡུལ, Druk Yul
+Bolivia, Plurinational State of: Estado Plurinacional de Bolivia, República de Bolivia, Bolivia, Bulibiya Mama llaqta, Wuliwya Suyu, Tetã Volívia 
+Bonaire, Sint Eustatius and Saba: Bonaire, Sint-Eustatius, en Saba
+Bosnia and Herzegovina: Republika Bosna i Hercegovina
+Botswana: Republic of Botswana, Lefatshe la Botswana
+Bouvet Island: Bouvetøya
+Brazil: República Federativa do Brasil
+British Indian Ocean Territory: 
+Brunei Darussalam: بروني دارالسلام, Negara Brunei Darussalam, State of Brunei Darussalam
+Bulgaria: Република България, Republika Bălgaria
+Burkina Faso: 
+Burundi: République du Burundi, Republika y’Uburundi
+Cambodia: ព្រះរាជាណាចក្រកម្ពុជា, Preăh Réachéanachâkr Kâmpŭchea
+Cameroon: Cameroun
+Canada: 
+Cape Verde: Cabo Verde
+Cayman Islands: 
+Central African Republic: République centrafricaine, Ködörösêse tî Bêafrîka
+Chad: جمهورية تشاد, Jumhūriyyat Tshād, République du Tchad
+Chile: 
+China: 中华人民共和国, Zhōnghuá Rénmín Gònghéguó
+Christmas Island: 
+Cocos (Keeling) Islands: 
+Colombia: 
+Comoros: Union des Comores, جزر القُمُر, Juzur al-Qumur, Udzima wa Komori
+Congo: République du Congo, Repubilika ya Kongo, Republiki ya Kongó, Congo-Brazzaville
+Congo, the Democratic Republic of the: République démocratique du Congo, Repubilika ya Kongo Demokratiki, Jamhuri ya Kidemokrasia ya Kongo, Republiki ya Kongó Demokratiki, Ditunga dia Kongu wa Mungalaata, Congo-Kinshasa, ex-Zaïre
+Cook Islands: 
+Costa Rica: República de Costa Rica
+Côte d'Ivoire: 
+Croatia: 
+Cuba: 
+CuraÃ§ao: 
+Cyprus: Κύπρος, Kýpros, Kıbrıs, Κυπριακή Δημοκρατία, Kypriakí Dimokratía, Kibris Cumhuriyeti
+Czech Republic: Ceská Republika
+Denmark: Kongeriget Danmark, Danmark
+Djibouti: République de Djibouti, جمهورية جيبوتي, Jumhūriyyat Jībūtī, Gabuutih Ummuuno, Jamahuuriyada Jabuuti
+Dominica: Commonwealth of Dominica
+Dominican Republic: República Dominicana
+Ecuador: República del Ecuador
+Egypt: Gumhuriyyat Miṣr al-ʿArabiyyah, République arabe d’Égypte, جمهوريّة مصر العربيّة
+El Salvador: República de El Salvador
+Equatorial Guinea: República de Guiena ecuatorial, République de Guinée équatoriale, República da Guiné Equatorial
+Eritrea: ሃገረ ኤርትራ,Hagere Ertra, دولة إرتريا, Dawlat Iritriyá, State of Eritrea
+Estonia: Eesti
+Ethiopia: የኢትዮጵያ ፌዴራላዊ ዲሞክራሲያዊ ሪፐብሊክ, YeItyopya Fédéralawi Dimokrasiyawi Ripeblik
+Falkland Islands (Malvinas): Falkland Islands
+Faroe Islands: Føroyar, Færøerne
+Fiji: Republic of Fiji, Matanitu ko Viti, फ़िजी द्वीप समूह गणराज्य, Fiji Dvip Qamooh Ganarajya
+Finland: Suomen Tasavalta
+France: République française
+French Guiana: Guyane, Guyane Française
+French Polynesia: Polynésie française, Pōrīnetia Farāni 
+French Southern Territories: Terres australes et antarctiques françaises
+Gabon: République gabonaise
+Gambia:	Republic of Gambia
+Georgia: საქართველო, Sakartvelo 
+Germany: Deutschland
+Ghana: Republic of Ghana
+Gibraltar: 
+Greece: Ελλάδα, Ellinikí Dimokratía
+Greenland: Kalaallit Nunaat, Grønland
+Grenada: Commonwealth of Grenada
+Guadeloupe: 
+Guam: Guåhån
+Guatemala: República de Guatemala
+Guernsey: 
+Guinea: Guinée, République de Guinée
+Guinea-Bissau: República da Guiné-Bissau
+Guyana: Co-Operative Republic of Guyana, République coopérative du Guyana
+Haiti: Repiblik d'Ayiti, République d'Haïti
+Heard Island and McDonald Islands: 
+Holy See (Vatican City State): Stato della Città del Vaticano, Vatican
+Honduras: República de Honduras
+Hong Kong: 香港, Hoeng1 Gong2, Hēunggóng, 香港, Hiông-Kóng, Hiong-kang, 香港, Xiānggǎng, 香港特別行政區, 香港特别行政区, Hong Kong Special Administrative Region of the People's Republic of China
+Hungary: Magyar
+Iceland: Ísland, Island
+India: Republic of India
+Indonesia: Republik Indonesia
+Iran, Islamic Republic of: جمهوری اسلامی ايران, Jomhūrī-ye Eslāmī-ye Īrān, Iran
+Iraq: العراق, Al `Irāq
+Ireland: Éire, Eire
+Isle of Man: 
+Israel: מְדִינַת יִשְׂרָאֵל, Medinat Yisra'el, دولة إسرائيل, Dawlat Isrā'īl
+Italy: Italia
+Jamaica: Jamaïca
+Japan: 日本国, Nihon Koku
+Jersey: Bailiwick of Jersey, Bailliage de Jersey
+Jordan: المملكة الأردنّيّة الهاشميّة, Al Mamlakah al Urduniyah al Hashimiyah
+Kazakhstan: Қазақстан Республикасы, Qazaqstan Respublïkası
+Kenya: Jamhuri ya Kenya, Republic of Kenya
+Kiribati: 
+Korea, Democratic People's Republic of: 조선민주주의인민공화국, Chosŏn Minjujuŭi Inmin Konghwaguk, 朝鮮民主主義人民共和國
+Korea, Republic of: 대한민국, Daehan Min-guk, 大韓民國
+Kuwait: دولة الكويت, Dawlat al Kuwayt
+Kyrgyzstan: Кыргыз Республикасы, Kırgız Respublikası, Кыргызская республика, Kyrgyzskaya Respublika
+Lao People's Democratic Republic: ສາທາລະນະລັດ ປະຊາທິປະໄຕ ປະຊາຊົນລາວ, Sathalanalat Passathipatai Passasson lao
+Latvia: Latvijas
+Lebanon: République du Liban, الجمهوريّةاللبنانيّة
+Lesotho: Muso oa Lesotho, Kingdom of Lesotho
+Liberia: Republic of Liberia
+Libya: دولة ليبيا, Dawlat Lībiyya, ⵍⵉⴱⵢⴰ, Lībya
+Liechtenstein: Fürstentum Liechtenstein
+Lithuania: Lietuvos Respublika, Lietuva
+Luxembourg: Groussherzogtum Lëtzebuerg, Grand Duché de Luxembourg, Großherzogtum Luxemburg
+Macao: Região Administrativa Especial de Macau da República Popular da China
+Macedonia, the former Yugoslav Republic of: Република Македонија, Macedonia
+Madagascar: République de Madagascar, Repoblikan'i Madagasikara
+Malawi: Republic of Malawi, Dziko la Malaŵi
+Malaysia: 
+Maldives: Divehi Rājjey ge Jumhuriyyā, ދިވެހިރާއްޖޭގެ ޖުމްހޫރިއްޔާ
+Mali: République du Mali
+Malta: Repubblika ta' Malta, Republic of Malta
+Marshall Islands: Aolepān Aorōkin M̧ajeļ, Republic of the Marshall Islands
+Martinique: 
+Mauritania: République islamique de Mauritanie, الجمهورية الإسلامية الموريتانية
+Mauritius: Maurice
+Mayotte: 
+Mexico: Estados Unidos Mexicanos
+Micronesia, Federated States of: Micronesia
+Moldova, Republic of: Moldova, Republica Moldova
+Monaco: 
+Mongolia: Монгол Улс Mongol Uls
+Montenegro: 
+Montserrat: 
+Morocco: المملكة المغربية, Al Mamlakatu'l-Maghribiya, ⵜⴰⴳⵍⴷⵉⵜ ⵏ ⵍⵎⴰⵖⵔⵉⴱ, Tagldit n'Lmeġrib
+Mozambique: República de Moçambique
+Myanmar: Union of Myanmar
+Namibia: 
+Nauru: 
+Nepal: 
+Netherlands: Nederland
+New Caledonia: Nouvelle-Calédonie, Nouvelle Calédonie
+New Zealand: 
+Nicaragua: Republica de Nicaragua
+Niger: 
+Nigeria: 
+Niue: Niuē
+Norfolk Island: 
+Northern Mariana Islands: Commonwealth of the Northern Mariana Islands
+Norway: Kongeriket Norge, Noreg
+Oman: Saltanat Uman, سلطنة عُمان
+Pakistan: Islami Jamhuria Pakistan, اسلامی جمہوریت پاکستان
+Palau: Republic of Palau, Beluu er a Belau 
+Palestine, State of: دولة فلسطين, Dawlat Filasţīn
+Panama: República de Panamá
+Papua New Guinea: l'État indépendant de Papouasie-Nouvelle-Guinée, The independent State of Papua New Guinea, Independen Stet bilong Papua Niugini
+Paraguay: República del Paraguay, Tetä Paraguáype
+Peru: 
+Philippines: Republika ng Pilipinas
+Pitcairn: 
+Poland: Polska
+Portugal: 
+Puerto Rico: Estado Libre Asociado de Puerto Rico, Commonwealth of Puerto Rico
+Qatar: دولة قطر, Dawlat Qatar
+Réunion: La Réunion
+Romania: România
+Russian Federation: Российская Федерация, Rossiiskaïa Fédératsiya
+Rwanda: Repubulika y'u Rwanda, République Rwandaise
+Saint Barthélemy: 
+Saint Helena, Ascension and Tristan da Cunha: Saint Helena
+Saint Kitts and Nevis: 
+Saint Lucia: Commonwealth of Saint Lucia
+Saint Martin (French part): 
+Saint Pierre and Miquelon: 
+Saint Vincent and the Grenadines: 
+Samoa: Malo Sa'oloto Tuto'atasi o Samoa, Independent State of Samoa
+San Marino: 
+Sao Tome and Principe: República Democrática de São Tomé e Príncipe
+Saudi Arabia: المملكة العربية السعودية, Mamlakah al `Arabiyahas Su`udiyah
+Senegal: République du Sénégal
+Serbia: Република Србија, Republika Srbija
+Seychelles: Repiblik Sesel, Republic of Seychelles, République des Seychelles
+Sierra Leone: 
+Singapore: Republic of Singapore, Republik Singapura, Cingkappūrā Kudiyaracu, Xīnjīapō Gònghégúo
+Sint Maarten (Dutch part): 
+Slovakia: Slovenská republika
+Slovenia: Republika Slovenija
+Solomon Islands: Salomons Islands
+Somalia: la République fédérale de Somalie, Jamhuuriyadda Federaalka Soomaaliya, جمهورية الصومال الفدرالية, the Federal Republic of Somalia
+South Africa: Republic of South Africa, Republiek van Suid-Afrika, IRiphabliki yaseMzantsi Afrika, IRiphabliki yaseNingizimu Afrika, IRiphabliki yeSewula Afrika
+South Georgia and the South Sandwich Islands: Géorgie du Sud-et-les Îles Sandwich du Sud
+South Sudan: Republic of South Sudan
+Spain: España
+Sri Lanka: Prajatantrika Samajavadi Janarajaya, Ilankai Sananayaka Sosolisa Kudiyarasu
+Sudan: Jumhuriyat al-Sudan, جمهورية السودان
+Suriname: Republiek Suriname
+Svalbard and Jan Mayen: Svalbard og Jan Mayen
+Swaziland: Umbuso we Swatini, Kingdom of Swaziland
+Sweden: Sverige
+Switzerland: Confœderatio Helvetica, Schweizerische Eidgenossenschaft, Confédération suisse, Confederazione Svizzera, Confederaziun svizra
+Syrian Arab Republic: الجمهوريّة العربيّة السّوريّة, Al-Jumhūriyyah al-‘Arabīyyah as-Sūriyyah
+Taiwan, Province of China: 台灣, 臺灣, 台湾, Táiwān, Formose
+Tajikistan: Ҷумҳурии Тоҷикистон, Jumhurii Tojikiston, Респу́блика Таджикиста́н, Respúblika Tadshikistán
+Tanzania, United Republic of: United Republic of Tanzania, Jamhuri ya Muungano wa Tanzania
+Thailand: ราชอาณาจักรไทย, Ratcha Anachak Thai
+Timor-Leste: Repúblika Demokrátika Timor Lorosa'e, República Democrática de Timor-Leste
+Togo: République togolaise
+Tokelau: 
+Tonga: Pule'anga Fakatu'i 'o Tonga, Kingdom of Tonga
+Trinidad and Tobago: Republic of Trinidad and Tobago
+Tunisia: الجمهورية التونسية, al-Jumhūriyya at-Tūnisiyya
+Turkey: Türkiye Cumhuriyeti
+Turkmenistan: Türkmenistan Respublikasy, Республика Туркменистан, Respublika Turkmenistan
+Turks and Caicos Islands: Turks-and-Caicos
+Tuvalu: State of Tuvalu
+Uganda: Republic of Uganda, Jamhuri ya Uganda
+Ukraine: Украïна, Ukraïna
+United Arab Emirates: دولة الإمارات العربيّة المتّحدة, al-ʾImārāt al-ʿArabiyyat al-Muttaḥida
+United Kingdom: 
+United States: United States of America
+United States Minor Outlying Islands: 
+Uruguay: República Oriental del Uruguay
+Uzbekistan: O'zbekiston Respublikasi
+Vanuatu: Ripablik blong Vanuatu, Republic of Vanuatu, République de Vanuatu
+Venezuela, Bolivarian Republic of: República Bolivariana de Venezuela
+Viet Nam: Cộng Hoà Xã Hội Chủ Nghĩa Việt Nam, la République socialiste du Viet Nam
+Virgin Islands, British: British Virgin Islands
+Virgin Islands, U.S.: US Virgin Islands
+Wallis and Futuna: Wallis-et-Futuna
+Western Sahara: 
+Yemen: ﺍﻟﺠﻤﻬﻮﺭﯾّﺔ اليمنية
+Zambia: Republic of Zambia
+Zimbabwe: Republic of Zimbabwe

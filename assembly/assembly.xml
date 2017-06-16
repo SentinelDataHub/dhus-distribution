@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<assembly xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2
+            http://maven.apache.org/xsd/assembly-1.1.2.xsd">
+
+   <id>distribution</id>
+   <formats>
+      <format>shar</format>
+      <format>zip</format>
+   </formats>
+   <includeBaseDirectory>false</includeBaseDirectory>
+
+   <fileSets>
+      <fileSet>
+         <directory>script</directory>
+         <outputDirectory>.</outputDirectory>
+      </fileSet>
+      <fileSet>
+         <directory>etc</directory>
+         <outputDirectory>etc</outputDirectory>
+      </fileSet>
+      <fileSet>
+         <directory>target/native</directory>
+         <outputDirectory>lib/native</outputDirectory>
+      </fileSet>
+   </fileSets>
+
+   <files>
+      <file>
+         <source>.version</source>
+         <outputDirectory>lib</outputDirectory>
+         <filtered>true</filtered>
+      </file>
+   </files>
+
+   <!-- Includes dependent Jar archives -->
+   <dependencySets>
+      <dependencySet>
+         <useProjectArtifact>false</useProjectArtifact>
+         <outputDirectory>lib</outputDirectory>
+         <scope>runtime</scope>
+      </dependencySet>
+   </dependencySets>
+</assembly>
