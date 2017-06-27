@@ -231,6 +231,17 @@
          </url>
          <layout>default</layout>
       </repository>
+            
+      <repository>
+         <uniqueVersion>true</uniqueVersion>
+         <id>osf-delivery</id>
+         <name>OSF Releases Repository</name>
+         <url>https://copernicus.serco.eu/repository/nexus/content/repositories/OSF_releases/</url>
+         <layout>default</layout>
+      </repository>      
+            
+            
+            
    </repositories>
 
    <distributionManagement>
