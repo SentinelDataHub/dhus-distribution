@@ -131,7 +131,7 @@
                         <artifactItem>
                            <groupId>eu.serco.dhus.plugins</groupId>
                            <artifactId>dhus-plugin-olci</artifactId>
-                         <!--  <version>0.0.1</version>   -->                        
+                   <version>0.0.2-1-osf</version>                           
                            <overWrite>true</overWrite>
                            <outputDirectory>etc</outputDirectory>
                            <includes>**/OL*.properties,**/OL*.xml</includes>                           
@@ -139,7 +139,7 @@
                         <artifactItem>
                            <groupId>eu.serco.dhus.plugins</groupId>
                            <artifactId>dhus-plugin-synergy</artifactId>
-                           <!--<version>0.0.1</version>  -->                         
+                        <version>0.0.2-1-osf</version>                           
                            <overWrite>true</overWrite>
                            <outputDirectory>etc</outputDirectory>
                            <includes>**/SY*.properties,**/SY*.xml</includes>                           
@@ -147,7 +147,7 @@
                         <artifactItem>
                            <groupId>eu.serco.dhus.plugins</groupId>
                            <artifactId>dhus-plugin-slstr</artifactId>
-                         <!--  <version>0.0.1</version>    -->                       
+                          <version>0.0.2-1-osf</version>                         
                            <overWrite>true</overWrite>
                            <outputDirectory>etc</outputDirectory>
                            <includes>**/SL*.properties,**/SL*.xml</includes>                           
@@ -155,7 +155,7 @@
                         <artifactItem>
                            <groupId>eu.serco.dhus.plugins</groupId>
                            <artifactId>dhus-plugin-sral</artifactId>
-                          <!-- <version>0.0.1</version>     -->                      
+                <version>0.0.2-1-osf</version>                      
                            <overWrite>true</overWrite>
                            <outputDirectory>etc</outputDirectory>
                            <includes>**/SR*.properties,**/SR*.xml</includes>                           
