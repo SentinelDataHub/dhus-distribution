@@ -10,19 +10,19 @@
    <properties>
       <!-- Customize here the components version to be
            embeded into this distribution  -->
-      <dhus.core>1.0.1-6-osf</dhus.core>
-      <dhus.ajs>0.13.5-1-osf</dhus.ajs>
-      <dhus.owc-client>0.15.0-1-osf</dhus.owc-client>
+      <dhus.core>1.0.1-8-osf</dhus.core>
+      <dhus.ajs>0.13.5-4-osf</dhus.ajs>
+      <dhus.owc-client>0.15.1-2-osf</dhus.owc-client>
       <dhus.addon.sentinel_1>1.0.7-osf</dhus.addon.sentinel_1>
       <dhus.addon.sentinel_2>1.1.11-osf</dhus.addon.sentinel_2>
       <dhus.addon.sentinel_3>1.0.8-osf</dhus.addon.sentinel_3>
       <dhus.addon.landsat_8>1.0.2-osf</dhus.addon.landsat_8>
       <dhus.addon.pleiades>1.0.1-osf</dhus.addon.pleiades>
-      <dhus.addon.adf.services>0.0.2-osf</dhus.addon.adf.services>
-      <dhus.addon.adf.plugin.olci>0.0.2-osf</dhus.addon.adf.plugin.olci>
-      <dhus.addon.adf.plugin.slstr>0.0.2-osf</dhus.addon.adf.plugin.slstr>
-      <dhus.addon.adf.plugin.sral>0.0.2-osf</dhus.addon.adf.plugin.sral>
-      <dhus.addon.adf.plugin.synergy>0.0.2-osf</dhus.addon.adf.plugin.synergy>
+      <dhus.addon.adf.services>0.0.2-1-osf</dhus.addon.adf.services>
+      <dhus.addon.adf.plugin.olci>0.0.2-1-osf</dhus.addon.adf.plugin.olci>
+      <dhus.addon.adf.plugin.slstr>0.0.2-1-osf</dhus.addon.adf.plugin.slstr>
+      <dhus.addon.adf.plugin.sral>0.0.2-1-osf</dhus.addon.adf.plugin.sral>
+      <dhus.addon.adf.plugin.synergy>0.0.2-1-osf</dhus.addon.adf.plugin.synergy>
       <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
       <openjpeg.version>2.4.0</openjpeg.version>
       <openjpeg.classifier>${os.name}-${os.arch}</openjpeg.classifier>
@@ -131,7 +131,7 @@
                         <artifactItem>
                            <groupId>eu.serco.dhus.plugins</groupId>
                            <artifactId>dhus-plugin-olci</artifactId>
-                           <version>0.0.1</version>                           
+                         <!--  <version>0.0.1</version>   -->                        
                            <overWrite>true</overWrite>
                            <outputDirectory>etc</outputDirectory>
                            <includes>**/OL*.properties,**/OL*.xml</includes>                           
@@ -139,7 +139,7 @@
                         <artifactItem>
                            <groupId>eu.serco.dhus.plugins</groupId>
                            <artifactId>dhus-plugin-synergy</artifactId>
-                           <version>0.0.1</version>                           
+                           <!--<version>0.0.1</version>  -->                         
                            <overWrite>true</overWrite>
                            <outputDirectory>etc</outputDirectory>
                            <includes>**/SY*.properties,**/SY*.xml</includes>                           
@@ -147,7 +147,7 @@
                         <artifactItem>
                            <groupId>eu.serco.dhus.plugins</groupId>
                            <artifactId>dhus-plugin-slstr</artifactId>
-                           <version>0.0.1</version>                           
+                         <!--  <version>0.0.1</version>    -->                       
                            <overWrite>true</overWrite>
                            <outputDirectory>etc</outputDirectory>
                            <includes>**/SL*.properties,**/SL*.xml</includes>                           
@@ -155,7 +155,7 @@
                         <artifactItem>
                            <groupId>eu.serco.dhus.plugins</groupId>
                            <artifactId>dhus-plugin-sral</artifactId>
-                           <version>0.0.1</version>                           
+                          <!-- <version>0.0.1</version>     -->                      
                            <overWrite>true</overWrite>
                            <outputDirectory>etc</outputDirectory>
                            <includes>**/SR*.properties,**/SR*.xml</includes>                           
@@ -273,7 +273,7 @@
             <library.type>so</library.type>
          </properties>
       </profile>
-
+<!--
       <profile>
          <id>s3-pdr</id>
          <dependencies>
@@ -284,6 +284,6 @@
             </dependency>
          </dependencies>
       </profile>
-   </profiles>
+   </profiles>-->
 
 </project>
