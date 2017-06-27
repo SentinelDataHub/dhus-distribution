@@ -30,7 +30,7 @@
 
    <groupId>fr.gael.dhus</groupId>
    <artifactId>dhus-software</artifactId>
-   <version>0.13.4-4-osf</version>
+   <version>0.13.4-6-osf</version>
    <packaging>pom</packaging>
 
    <name>DHuS - Software Distribution</name>
