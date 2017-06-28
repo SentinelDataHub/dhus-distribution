@@ -217,10 +217,10 @@
 
    <repositories>
       <repository>
-        <id>osf-releases</id>
+        <id>osf-delivery</id>
         <name>Releases Repository</name>
         <url>
-          https://copernicus.serco.eu/repository/nexus/content/repositories/releases/
+          https://copernicus.serco.eu/repository/nexus/content/repositories/OSF_releases
         </url>
       </repository>
       <repository>
@@ -231,7 +231,7 @@
          </url>
          <layout>default</layout>
       </repository>
-            
+<!--            
       <repository>
          <uniqueVersion>true</uniqueVersion>
          <id>osf-delivery</id>
@@ -239,18 +239,18 @@
          <url>https://copernicus.serco.eu/repository/nexus/content/repositories/OSF_releases/</url>
          <layout>default</layout>
       </repository>      
-            
+-->            
             
             
    </repositories>
 
    <distributionManagement>
       <repository>
-         <uniqueVersion>true</uniqueVersion>
-         <id>osf-releases</id>
+        <!-- <uniqueVersion>true</uniqueVersion>-->
+         <id>osf-delivery</id>
          <name>OSF Releases Repository</name>
          <url>
-            https://copernicus.serco.eu/repository/nexus/content/repositories/releases/
+            https://copernicus.serco.eu/repository/nexus/content/repositories/OSF_releases
 
          </url>
          <layout>default</layout>
