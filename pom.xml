@@ -10,19 +10,20 @@
    <properties>
       <!-- Customize here the components version to be
            embeded into this distribution  -->
-      <dhus.core>1.0.1-8-osf</dhus.core>
-      <dhus.ajs>0.13.5-4-osf</dhus.ajs>
-      <dhus.owc-client>0.15.1-2-osf</dhus.owc-client>
+      <dhus.core>1.0.1-15-osf</dhus.core>
+      <dhus.ajs>0.13.5-10-osf</dhus.ajs>
+      <dhus.owc-client>0.15.1-7-osf</dhus.owc-client>
       <dhus.addon.sentinel_1>1.0.7-osf</dhus.addon.sentinel_1>
-      <dhus.addon.sentinel_2>1.1.11-osf</dhus.addon.sentinel_2>
-      <dhus.addon.sentinel_3>1.0.8-osf</dhus.addon.sentinel_3>
+      <dhus.addon.sentinel_2>1.2.2-osf</dhus.addon.sentinel_2>
+      <dhus.addon.sentinel_3>1.0.9-osf</dhus.addon.sentinel_3>
       <dhus.addon.landsat_8>1.0.2-osf</dhus.addon.landsat_8>
       <dhus.addon.pleiades>1.0.1-osf</dhus.addon.pleiades>
-      <dhus.addon.adf.services>0.0.2-1-osf</dhus.addon.adf.services>
-      <dhus.addon.adf.plugin.olci>0.0.2-1-osf</dhus.addon.adf.plugin.olci>
-      <dhus.addon.adf.plugin.slstr>0.0.2-1-osf</dhus.addon.adf.plugin.slstr>
-      <dhus.addon.adf.plugin.sral>0.0.2-1-osf</dhus.addon.adf.plugin.sral>
-      <dhus.addon.adf.plugin.synergy>0.0.2-1-osf</dhus.addon.adf.plugin.synergy>
+      <dhus.addon.cosmo>1.0.2-osf</dhus.addon.cosmo> 
+      <dhus.addon.adf.services>0.0.3-osf</dhus.addon.adf.services>
+      <dhus.addon.adf.plugin.olci>0.0.3-osf</dhus.addon.adf.plugin.olci>
+      <dhus.addon.adf.plugin.slstr>0.0.3-osf</dhus.addon.adf.plugin.slstr>
+      <dhus.addon.adf.plugin.sral>0.0.3-osf</dhus.addon.adf.plugin.sral>
+      <dhus.addon.adf.plugin.synergy>0.0.3-osf</dhus.addon.adf.plugin.synergy>
       <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
       <openjpeg.version>2.4.0</openjpeg.version>
       <openjpeg.classifier>${os.name}-${os.arch}</openjpeg.classifier>
@@ -30,7 +31,7 @@
 
    <groupId>fr.gael.dhus</groupId>
    <artifactId>dhus-software</artifactId>
-   <version>0.13.4-6-osf</version>
+   <version>1.0</version>
    <packaging>pom</packaging>
 
    <name>DHuS - Software Distribution</name>
@@ -89,6 +90,24 @@
          <artifactId>dhus-plugin-sral</artifactId>
          <version>${dhus.addon.adf.plugin.sral}</version>
       </dependency>
+
+<dependency>
+     <groupId>eu.serco.xmf.drb</groupId>
+      <artifactId>dhus-addon-cosmo</artifactId>
+      <version>${dhus.addon.cosmo}</version>
+</dependency>
+
+<dependency>
+    <groupId>eu.serco.xmf.drb</groupId>
+    <artifactId>dhus-addon-pleiades</artifactId>
+    <version>${dhus.addon.pleiades}</version>
+</dependency>
+
+<dependency>
+      <groupId>eu.serco.xmf.drb</groupId>
+      <artifactId>dhus-addon-landsat-8</artifactId>
+      <version>${dhus.addon.landsat_8}</version>
+</dependency>
    </dependencies>
 
    <build>
@@ -131,7 +150,7 @@
                         <artifactItem>
                            <groupId>eu.serco.dhus.plugins</groupId>
                            <artifactId>dhus-plugin-olci</artifactId>
-                   <version>0.0.2-1-osf</version>                           
+                   <version>0.0.3-osf</version>                           
                            <overWrite>true</overWrite>
                            <outputDirectory>etc</outputDirectory>
                            <includes>**/OL*.properties,**/OL*.xml</includes>                           
@@ -139,7 +158,7 @@
                         <artifactItem>
                            <groupId>eu.serco.dhus.plugins</groupId>
                            <artifactId>dhus-plugin-synergy</artifactId>
-                        <version>0.0.2-1-osf</version>                           
+                        <version>0.0.3-osf</version>                           
                            <overWrite>true</overWrite>
                            <outputDirectory>etc</outputDirectory>
                            <includes>**/SY*.properties,**/SY*.xml</includes>                           
@@ -147,7 +166,7 @@
                         <artifactItem>
                            <groupId>eu.serco.dhus.plugins</groupId>
                            <artifactId>dhus-plugin-slstr</artifactId>
-                          <version>0.0.2-1-osf</version>                         
+                          <version>0.0.3-osf</version>                         
                            <overWrite>true</overWrite>
                            <outputDirectory>etc</outputDirectory>
                            <includes>**/SL*.properties,**/SL*.xml</includes>                           
@@ -155,7 +174,7 @@
                         <artifactItem>
                            <groupId>eu.serco.dhus.plugins</groupId>
                            <artifactId>dhus-plugin-sral</artifactId>
-                <version>0.0.2-1-osf</version>                      
+                <version>0.0.3-osf</version>                      
                            <overWrite>true</overWrite>
                            <outputDirectory>etc</outputDirectory>
                            <includes>**/SR*.properties,**/SR*.xml</includes>                           
@@ -223,6 +242,9 @@
           https://copernicus.serco.eu/repository/nexus/content/repositories/OSF_releases
         </url>
       </repository>
+	  
+	
+
       <repository>
          <id>osf-public</id>
          <name>OSF Public Repository</name>
@@ -231,18 +253,18 @@
          </url>
          <layout>default</layout>
       </repository>
-<!--            
-      <repository>
-         <uniqueVersion>true</uniqueVersion>
-         <id>osf-delivery</id>
-         <name>OSF Releases Repository</name>
-         <url>https://copernicus.serco.eu/repository/nexus/content/repositories/OSF_releases/</url>
-         <layout>default</layout>
-      </repository>      
--->            
+       
             
             
    </repositories>
+     <pluginRepositories>
+      <pluginRepository>
+       <id>osf-plugin</id>
+        <url>https://copernicus.serco.eu/repository/nexus/content/groups/public
+		</url>
+      </pluginRepository>
+   </pluginRepositories>
+
 
    <distributionManagement>
       <repository>
