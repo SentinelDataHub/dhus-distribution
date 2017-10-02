@@ -1,0 +1,16 @@
+<izpack:userinput version="5.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:izpack="http://izpack.org/schema/userinput" xsi:schemaLocation="http://izpack.org/schema/userinput http://izpack.org/schema/5.0/izpack-userinput-5.0.xsd">
+    <panel id="settings">
+        <field type="staticText" align="left" txt="Configuration:" id="input.title"/>
+        <field type="dir" align="left" variable="DHUS_INCOMING">
+            <!--<description id="Product Archive Folder" txt="Product Archive Folder" />-->
+            <spec txt="Product Archive" size="15" set="$INSTALL_PATH/incoming" mustExist="false" create="true"/>
+        </field>
+        <field type="dir" align="left" variable="DHUS_VAR">
+            <!--<description id="Database Folder" txt="Database Folder" />-->
+            <spec txt="Database" size="15" set="$INSTALL_PATH/var" mustExist="false" create="true"/>
+        </field>
+        <field type="text" align="left" variable="DHUS_PORT">
+            <spec txt="Web Client Port:" id="dhus.port" size="6" set="8081"/>
+        </field>
+    </panel>
+</izpack:userinput>
