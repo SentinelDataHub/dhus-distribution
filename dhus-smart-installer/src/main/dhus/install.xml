@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<installation version="5.0">
+  <info>
+    <appname>DataHubSystem</appname>
+    <appversion>0.0</appversion>
+    <url>http://sentineldatahub.github.io/DataHubSystem</url>
+    <authors>
+        <author name="Arturo Montieri" email="amontieri@serco.com"/>
+    </authors>
+  </info>
+  <guiprefs height="400" resizable="no" width="800">
+    <modifier key="useButtonIcons" value="yes"/>
+    <modifier key="useLabelIcons" value="no"/>
+    <modifier key="labelGap" value="2"/>
+    <modifier key="layoutAnchor" value="NORTHWEST"/>
+    <modifier key="useHeadingPanel" value="no"/>
+    <modifier key="headingImageOnLeft" value="yes"/>
+    <modifier key="headingLineCount" value="1"/>
+    <modifier key="headingFontSize" value="1.5"/>
+    <modifier key="headingBackgroundColor" value="0x00ffffff"/>
+    <modifier key="headingPanelCounter" value="progressbar"/>
+    <modifier key="headingPanelCounterPos" value="inNavigationPanel"/>
+  </guiprefs>
+  <locale>
+    <langpack iso3="eng"/>
+  </locale>
+  <resources>
+    <res id="LicencePanel.licence" src="Licence.txt"/>
+    <res id="InfoPanel.info" src="Readme.txt"/>
+    <res id="HTMLHelloPanel.welcome" src="welcome.html"/>
+    <res id="HTMLInfoPanel.welcome" src="welcome.html"/>
+    <res id="IZPackLogo" src="LogoConsortium.png"/>
+    <res id="Installer.image" src="LogoAgencies.jpg"/>
+    <res id="TargetPanel.dir.windows" src="TargetDirWindows.txt"/>
+    <res id="TargetPanel.dir.unix" src="TargetDirUnix.txt"/>
+    <res id="userInputSpec.xml" src="user_input_spec.xml" parse="yes" type="xml"/>
+  </resources>
+  <variables>
+    <variable name="InstallerFrame.logfilePath" value="Default"/>
+    <variable name="WELCOME_TEXT" value="DataHubSystem"/>
+    <variable name="version" value="1.0"/>
+    <variable name="WELCOME_VERSION" value="Version: ${version}"/>
+  </variables>
+  
+   <!-- pull in the built jar file for our custom panel -->
+  <!--<jar src="custom/izpack-panels.jar" stage="both"/>-->
+  
+  <panels>
+
+
+    <!-- FIXME why doesn't HTMLHelloPanel work any more?  it is nice not to have the "Please read the following information" text ... -->
+    <panel classname="HTMLInfoPanel" id="welcome"/>
+    <panel classname="InfoPanel"/>
+    <panel classname="LicencePanel"/>
+    
+    <!-- this is our custom panel, loaded from the izpack-panels.jar file -->    
+    <!--<panel classname="com.izforge.izpack.panels.mypanels.MyHelloPanel" id="myHello"/>-->
+       
+    <panel classname="TargetPanel" id="install_dir"/>
+    <panel classname="UserInputPanel" id="settings"/>
+    <panel classname="PacksPanel" id="sdk_pack_select"/>
+    <panel classname="InstallPanel" id="install"/>
+    <panel classname="FinishPanel" id="finish"/>
+  </panels>
+  
+  <packs>
+    <pack name="Core" preselected="yes" required="yes">
+      <description>DataHubSystem - Core</description>
+      <file src="dhus-software-${version}-distribution.zip" targetdir="$INSTALL_PATH" unpack="true"/>
+    </pack>
+   <!-- <pack name="Incoming Archive" preselected="yes" required="yes">
+      <description>DataHubSystem - Incoming Archive</description>
+      <file src="incoming/readme.txt" targetdir="$INSTALL_PATH/incoming"/>
+    </pack>
+    <pack name="Database" preselected="yes" required="yes">
+      <description>DataHubSystem - Database</description>
+      <file src="var/readme.txt" targetdir="$INSTALL_PATH/var"/>
+    </pack>-->
+    <pack name="Configuration" preselected="yes" required="yes">
+      <description>DataHubSystem - Configuration</description>
+      <file targetdir="$INSTALL_PATH" src="setup.sh" />
+      <executable targetfile="$INSTALL_PATH/setup.sh" type="bin" stage="postinstall" failure ="warn" keep="true" >
+        <os family="linux" />
+        <args>
+          <arg value="$INSTALL_PATH"/>
+          <arg value="$DHUS_INCOMING"/>
+          <arg value="$DHUS_VAR"/>
+          <arg value="$DHUS_PORT"/>
+        </args>
+      </executable>
+    </pack>
+    <!--<pack name="Sentinel_1_Test_Dataset" preselected="no" required="no">
+      <description>Sentinel_1_Test Dataset</description>
+      <file src="Sentinel_1_Test_Dataset/Sentinel_1_Test_Dataset.zip" targetdir="$INSTALL_PATH/Sentinel_1_Test_Dataset" unpack="true"/>
+    </pack>
+    <pack name="Sentinel_2_Test_Dataset" preselected="no" required="no">
+    <description>Sentinel_2_Test Dataset</description>
+    <file src="Sentinel_2_Test_Dataset/Sentinel_2_Test_Dataset.zip" targetdir="$INSTALL_PATH/Sentinel_2_Test_Dataset" unpack="true"/>
+    </pack>
+    <pack name="Sentinel_3_Test_Dataset" preselected="no" required="no">
+    <description>Sentinel_3_Test Dataset</description>
+    <file src="Sentinel_3_Test_Dataset/Sentinel_3_Test_Dataset.zip" targetdir="$INSTALL_PATH/Sentinel_3_Test_Dataset" unpack="true"/>
+    </pack>-->
+  </packs>
+</installation>

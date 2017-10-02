@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+<!--
+<parent>
+   <groupId>fr.gael.dhus</groupId>
+   <artifactId>dhus-software</artifactId>
+   <version>1.0</version>
+</parent>
+-->
+    <artifactId>smart-installer</artifactId>
+    <name>DHuS - Smart Installer</name>
+   <groupId>fr.gael.dhus</groupId>
+   <version>1.0-SNAPSHOT</version>
+
+
+<!-- seems like this needs to be "jar" to accomplish a build of java code too? a bit confused
+on the difference between putting "pom" and "jar" here. -->
+<packaging>jar</packaging>
+
+<!-- maven repository where the izpack-maven-plugin  and such live -->
+<repositories>
+    <repository>
+        <id>codehaus-releases</id>
+        <url>https://nexus.codehaus.org/content/repositories/releases</url>
+    </repository>
+</repositories>
+
+<properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <staging.dir>${project.build.directory}/staging</staging.dir>
+    <izpack.version>5.0.6</izpack.version>
+<!--    <dhus_version>${project.parent.version}</dhus_version>-->
+<dhus_version>1.0</dhus_version>
+    <installer-output-filename>dhus-smart-installer-${dhus_version}.jar</installer-output-filename>
+</properties>
+
+<developers>
+    <developer>
+        <id>amontieri</id>
+        <name>Arturo Montieri</name>
+        <email>amontieri@serco.com</email>
+        <timezone>+2</timezone>
+    </developer>
+</developers>
+
+
+
+<build>
+
+    <defaultGoal>package</defaultGoal>
+
+    <pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.izpack</groupId>
+                <artifactId>izpack-maven-plugin</artifactId>
+                <version>${izpack.version}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>2.4.1</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>2.6</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-install-plugin</artifactId>
+                <version>2.3.1</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>2.3</version>
+            </plugin>
+        </plugins>
+    </pluginManagement>
+
+    <plugins>
+
+
+        <plugin>
+            <artifactId>maven-resources-plugin</artifactId>
+            <executions>
+                <execution>
+                    <id>copy-appCtx</id>
+                    <phase>generate-resources</phase>
+                    <goals>
+                        <goal>copy-resources</goal>
+                    </goals>
+                    <configuration>
+                        <outputDirectory>${staging.dir}</outputDirectory>
+                        <overwrite>true</overwrite>
+                        <resources>
+                            <resource>
+                                <directory>../target/</directory>
+                                <includes>
+                                    <include>dhus-software-${dhus_version}-distribution.zip</include>
+                                </includes>
+                            </resource>
+                        </resources>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
+
+        <!-- copy all resources to the staging directory. -->
+        <plugin>
+            <artifactId>maven-resources-plugin</artifactId>
+            <executions>
+                <execution>
+                    <id>copy-resources</id>
+                    <!-- here the phase you need -->
+                    <phase>validate</phase>
+                    <goals>
+                        <goal>copy-resources</goal>
+                    </goals>
+                    <configuration>
+                        <outputDirectory>${staging.dir}</outputDirectory>
+
+                        <!-- recursive copy of all resource under src/main/izpack. this is the stuff to install as well as install.xml and panel data and such -->
+                        <resources>
+                            <resource>
+                                <directory>src/main/dhus</directory>
+                                <includes>
+                                    <include>**/*</include>
+                                </includes>
+                                <filtering>false</filtering>
+                            </resource>
+
+                        </resources>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
+
+        <!--
+         We need to tell the izpack-maven-plugin what to use as the base directory (this is our staging area), and also tell it the install file to use:
+        -->
+        <plugin>
+            <groupId>org.codehaus.izpack</groupId>
+            <artifactId>izpack-maven-plugin</artifactId>
+            <version>${izpack.version}</version>
+            <configuration>
+                <descriptorEncoding>UTF-8</descriptorEncoding>
+            </configuration>
+            <executions>
+                <execution>
+                    <phase>package</phase>
+                    <goals><goal>izpack</goal></goals>
+                    <configuration>
+                        <!-- base for relative paths in izpack descriptor -->
+                        <baseDir>${staging.dir}</baseDir>
+                        <installFile>${staging.dir}/install.xml</installFile>
+                        <output>${project.build.directory}/../../target/${installer-output-filename}</output>
+                    </configuration>
+                </execution>
+            </executions>
+            <!-- must have a dependency here on any code used in the installer, otherwise the classloader
+            will not find it.  So in this case we need our panels and then the package that contains the base classes
+            for the panels -->
+            <dependencies>
+
+                <!-- https://mvnrepository.com/artifact/org.apache.ant/ant -->
+                <dependency>
+                    <groupId>org.apache.ant</groupId>
+                    <artifactId>ant</artifactId>
+                    <version>1.8.2</version>
+                </dependency>
+
+            </dependencies>
+        </plugin>
+
+
+
+
+
+    </plugins>
+</build>
+
+</project>
