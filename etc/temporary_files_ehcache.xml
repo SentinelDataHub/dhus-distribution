@@ -1,0 +1,11 @@
+<!-- NETCDF files are cached in order to enhance their opening/inspection -->
+<!-- The following variables are configurable in order to tune the cache -->
+<!-- maxEntriesLocalHeap = Maximum number of cached files -->
+<!-- maxBytesLocalDisk = Maximum size for all cached files in bytes -->
+<ehcache name="TemporaryFilesCacheManager">
+	<cache name="TemporaryFilesCache"
+		maxEntriesLocalHeap="1000" 
+		maxBytesLocalDisk="10000000000">
+		<cacheEventListenerFactory class="fr.gael.streams.TemporaryFilesCacheListener" />
+	</cache>
+</ehcache>

@@ -40,6 +40,13 @@
          <useProjectArtifact>false</useProjectArtifact>
          <outputDirectory>lib</outputDirectory>
          <scope>runtime</scope>
+         <!-- Exclude some artifacts that are not shown in the dependency tree, but still present -->
+         <excludes>
+            <exclude>org.slf4j:jcl-over-slf4j</exclude>
+            <exclude>org.slf4j:jul-to-slf4j</exclude>
+            <exclude>org.slf4j:slf4j-log4j12</exclude>
+            <exclude>log4j:log4j</exclude>
+         </excludes>
       </dependencySet>
    </dependencySets>
 </assembly>

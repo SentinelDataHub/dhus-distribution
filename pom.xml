@@ -8,22 +8,27 @@
    <modelVersion>4.0.0</modelVersion>
 
    <properties>
-      <!-- Customize here the components version to be
-           embeded into this distribution  -->
-      <dhus.core>1.0.1-15-osf</dhus.core>
-      <dhus.ajs>0.13.5-10-osf</dhus.ajs>
-      <dhus.owc-client>0.15.1-7-osf</dhus.owc-client>
-      <dhus.addon.sentinel_1>1.0.7-osf</dhus.addon.sentinel_1>
-      <dhus.addon.sentinel_2>1.2.2-osf</dhus.addon.sentinel_2>
-      <dhus.addon.sentinel_3>1.0.9-osf</dhus.addon.sentinel_3>
+      <!-- Customize here the components version to be embedded into this distribution  -->
+      <dhus.core>1.3.5-osf</dhus.core>
+
+      <dhus.webclient>0.17.1-1-osf</dhus.webclient>
+      <dhus.owc-client>1.0.6-osf</dhus.owc-client>
+
+      <dhus.services>0.0.3-osf</dhus.services>
+      <dhus.plugin-olci>0.0.3-osf</dhus.plugin-olci>
+      <dhus.plugin-slstr>0.0.3-osf</dhus.plugin-slstr>
+      <dhus.plugin-sral>0.0.3-osf</dhus.plugin-sral>
+      <dhus.plugin-synergy>0.0.3-osf</dhus.plugin-synergy>
+
+      <dhus.addon.sentinel_1>1.0.19-osf</dhus.addon.sentinel_1>
+      <dhus.addon.sentinel_2>1.3.2-osf</dhus.addon.sentinel_2>
+      <dhus.addon.sentinel_3>1.0.20-osf</dhus.addon.sentinel_3>
+      <dhus.addon.sentinel_5p>1.0.9-osf</dhus.addon.sentinel_5p>
+      <dhus.addon.sentinel_aux>1.0.4-osf</dhus.addon.sentinel_aux>
       <dhus.addon.landsat_8>1.0.2-osf</dhus.addon.landsat_8>
       <dhus.addon.pleiades>1.0.1-osf</dhus.addon.pleiades>
-      <dhus.addon.cosmo>1.0.2-osf</dhus.addon.cosmo> 
-      <dhus.addon.adf.services>0.0.3-osf</dhus.addon.adf.services>
-      <dhus.addon.adf.plugin.olci>0.0.3-osf</dhus.addon.adf.plugin.olci>
-      <dhus.addon.adf.plugin.slstr>0.0.3-osf</dhus.addon.adf.plugin.slstr>
-      <dhus.addon.adf.plugin.sral>0.0.3-osf</dhus.addon.adf.plugin.sral>
-      <dhus.addon.adf.plugin.synergy>0.0.3-osf</dhus.addon.adf.plugin.synergy>
+      <dhus.addon.cosmo>1.0.8-osf</dhus.addon.cosmo>
+
       <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
       <openjpeg.version>2.4.0</openjpeg.version>
       <openjpeg.classifier>${os.name}-${os.arch}</openjpeg.classifier>
@@ -31,7 +36,7 @@
 
    <groupId>fr.gael.dhus</groupId>
    <artifactId>dhus-software</artifactId>
-   <version>1.0</version>
+   <version>2.0.0-osf</version>
    <packaging>pom</packaging>
 
    <name>DHuS - Software Distribution</name>
@@ -47,9 +52,9 @@
       <dependency>
          <groupId>fr.gael.dhus</groupId>
          <artifactId>dhus-web-client</artifactId>
-         <version>${dhus.ajs}</version>
+         <version>${dhus.webclient}</version>
       </dependency>
-    
+
       <dependency>
          <groupId>fr.gael.dhus</groupId>
          <artifactId>dhus-addon-sentinel-1</artifactId>
@@ -64,50 +69,68 @@
          <groupId>eu.serco.xmf.drb</groupId>
          <artifactId>dhus-addon-sentinel-3</artifactId>
          <version>${dhus.addon.sentinel_3}</version>
+         <exclusions>
+            <exclusion>
+               <groupId>log4j</groupId>
+               <artifactId>log4j</artifactId>
+            </exclusion>
+            <exclusion>
+               <groupId>org.slf4j</groupId>
+               <artifactId>jcl-over-slf4j</artifactId>
+            </exclusion>
+         </exclusions>
       </dependency>
+      <dependency>
+         <groupId>eu.serco.xmf.drb</groupId>
+         <artifactId>dhus-addon-sentinel-5p</artifactId>
+         <version>${dhus.addon.sentinel_5p}</version>
+      </dependency>
+      <dependency>
+         <groupId>eu.serco.xmf.drb</groupId>
+         <artifactId>dhus-addon-sentinel-aux</artifactId>
+         <version>${dhus.addon.sentinel_aux}</version>
+      </dependency>
+      <dependency>
+          <groupId>eu.serco.xmf.drb</groupId>
+          <artifactId>dhus-addon-pleiades</artifactId>
+          <version>${dhus.addon.pleiades}</version>
+      </dependency>
+      <dependency>
+         <groupId>eu.serco.xmf.drb</groupId>
+         <artifactId>dhus-addon-landsat-8</artifactId>
+         <version>${dhus.addon.landsat_8}</version>
+      </dependency>
+      <dependency>
+         <groupId>eu.serco.xmf.drb</groupId>
+         <artifactId>dhus-addon-cosmo</artifactId>
+         <version>${dhus.addon.cosmo}</version>
+      </dependency>
+
       <dependency>
          <groupId>eu.serco.dhus.services</groupId>
          <artifactId>dhus-services</artifactId>
-         <version>${dhus.addon.adf.services}</version>
+         <version>${dhus.services}</version>
       </dependency>
       <dependency>
          <groupId>eu.serco.dhus.plugins</groupId>
          <artifactId>dhus-plugin-olci</artifactId>
-         <version>${dhus.addon.adf.plugin.olci}</version>
+         <version>${dhus.plugin-olci}</version>
       </dependency>
       <dependency>
          <groupId>eu.serco.dhus.plugins</groupId>
          <artifactId>dhus-plugin-synergy</artifactId>
-         <version>${dhus.addon.adf.plugin.synergy}</version>
+         <version>${dhus.plugin-synergy}</version>
       </dependency>
       <dependency>
          <groupId>eu.serco.dhus.plugins</groupId>
          <artifactId>dhus-plugin-slstr</artifactId>
-         <version>${dhus.addon.adf.plugin.slstr}</version>
+         <version>${dhus.plugin-slstr}</version>
       </dependency>
       <dependency>
          <groupId>eu.serco.dhus.plugins</groupId>
          <artifactId>dhus-plugin-sral</artifactId>
-         <version>${dhus.addon.adf.plugin.sral}</version>
+         <version>${dhus.plugin-sral}</version>
       </dependency>
-
-<dependency>
-     <groupId>eu.serco.xmf.drb</groupId>
-      <artifactId>dhus-addon-cosmo</artifactId>
-      <version>${dhus.addon.cosmo}</version>
-</dependency>
-
-<dependency>
-    <groupId>eu.serco.xmf.drb</groupId>
-    <artifactId>dhus-addon-pleiades</artifactId>
-    <version>${dhus.addon.pleiades}</version>
-</dependency>
-
-<dependency>
-      <groupId>eu.serco.xmf.drb</groupId>
-      <artifactId>dhus-addon-landsat-8</artifactId>
-      <version>${dhus.addon.landsat_8}</version>
-</dependency>
    </dependencies>
 
    <build>
@@ -150,45 +173,57 @@
                         <artifactItem>
                            <groupId>eu.serco.dhus.plugins</groupId>
                            <artifactId>dhus-plugin-olci</artifactId>
-                   <version>0.0.3-osf</version>                           
                            <overWrite>true</overWrite>
                            <outputDirectory>etc</outputDirectory>
-                           <includes>**/OL*.properties,**/OL*.xml</includes>                           
+                           <includes>**/OL*.properties,**/OL*.xml</includes>
                         </artifactItem>
                         <artifactItem>
                            <groupId>eu.serco.dhus.plugins</groupId>
                            <artifactId>dhus-plugin-synergy</artifactId>
-                        <version>0.0.3-osf</version>                           
                            <overWrite>true</overWrite>
                            <outputDirectory>etc</outputDirectory>
-                           <includes>**/SY*.properties,**/SY*.xml</includes>                           
+                           <includes>**/SY*.properties,**/SY*.xml</includes>
                         </artifactItem>
                         <artifactItem>
                            <groupId>eu.serco.dhus.plugins</groupId>
                            <artifactId>dhus-plugin-slstr</artifactId>
-                          <version>0.0.3-osf</version>                         
                            <overWrite>true</overWrite>
                            <outputDirectory>etc</outputDirectory>
-                           <includes>**/SL*.properties,**/SL*.xml</includes>                           
+                           <includes>**/SL*.properties,**/SL*.xml</includes>
                         </artifactItem>
                         <artifactItem>
                            <groupId>eu.serco.dhus.plugins</groupId>
                            <artifactId>dhus-plugin-sral</artifactId>
-                <version>0.0.3-osf</version>                      
                            <overWrite>true</overWrite>
                            <outputDirectory>etc</outputDirectory>
-                           <includes>**/SR*.properties,**/SR*.xml</includes>                           
+                           <includes>**/SR*.properties,**/SR*.xml</includes>
+                        </artifactItem>
+                        <artifactItem>
+                           <groupId>fr.gael.dhus</groupId>
+                           <artifactId>dhus-owc-client</artifactId>
+                           <version>${dhus.owc-client}</version>
+                           <overWrite>true</overWrite>
+                           <outputDirectory>etc</outputDirectory>
+                           <includes>**/menu.json</includes>
+                        </artifactItem>
+                        <artifactItem>
+                           <groupId>fr.gael.dhus</groupId>
+                           <artifactId>dhus-web-client</artifactId>
+                           <version>${dhus-web-client}</version>
+                           <overWrite>true</overWrite>
+                           <outputDirectory>etc</outputDirectory>
+                           <includes>**/appconfig.json</includes>
                         </artifactItem>
                      </artifactItems>
                      <failOnMissingClassifierArtifact>true</failOnMissingClassifierArtifact>
                   </configuration>
-               </execution>               
+               </execution>
             </executions>
          </plugin>
 
          <plugin>
             <artifactId>maven-assembly-plugin</artifactId>
-            <version>2.2-beta-5</version>
+            <version>2.2.2</version>
             <configuration>
                <descriptors>
                   <descriptor>assembly/assembly.xml</descriptor>
@@ -211,26 +246,6 @@
                </dependency>
             </dependencies>
          </plugin>
-
-         <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-clean-plugin</artifactId>
-            <version>2.6.1</version>
-            <configuration>
-               <filesets>
-                  <fileset>
-                     <directory>native</directory>
-                     <followSymlinks>false</followSymlinks>
-                     <useDefaultExcludes>true</useDefaultExcludes>
-                     <includes>
-                        <include>*.so</include>
-                        <include>*.dll</include>
-                     </includes>
-                  </fileset>
-               </filesets>
-            </configuration>
-         </plugin>
-
       </plugins>
    </build>
 
@@ -239,12 +254,9 @@
         <id>osf-delivery</id>
         <name>Releases Repository</name>
         <url>
-          https://copernicus.serco.eu/repository/nexus/content/repositories/OSF_releases
+            https://copernicus.serco.eu/repository/nexus/content/repositories/OSF_releases
         </url>
       </repository>
-	  
-	
-
       <repository>
          <id>osf-public</id>
          <name>OSF Public Repository</name>
@@ -253,18 +265,16 @@
          </url>
          <layout>default</layout>
       </repository>
-       
-            
-            
    </repositories>
-     <pluginRepositories>
+
+   <pluginRepositories>
       <pluginRepository>
-       <id>osf-plugin</id>
-        <url>https://copernicus.serco.eu/repository/nexus/content/groups/public
-		</url>
+         <id>osf-plugin</id>
+         <url>
+            https://copernicus.serco.eu/repository/nexus/content/groups/public
+         </url>
       </pluginRepository>
    </pluginRepositories>
-
 
    <distributionManagement>
       <repository>
@@ -273,7 +283,6 @@
          <name>OSF Releases Repository</name>
          <url>
             https://copernicus.serco.eu/repository/nexus/content/repositories/OSF_releases
-
          </url>
          <layout>default</layout>
       </repository>
@@ -282,6 +291,7 @@
          <url>${site.baseUrl}/</url>
       </site>
    </distributionManagement>
+
    <profiles>
       <profile>
          <id>owc</id>
@@ -293,7 +303,7 @@
             </dependency>
          </dependencies>
       </profile>
- 
+
       <profile>
          <id>native-libraries-so</id>
          <activation>
@@ -306,13 +316,14 @@
             <library.type>so</library.type>
          </properties>
       </profile>
+
       <profile>
          <id>s3-pdr</id>
          <dependencies>
             <dependency>
                <groupId>eu.serco.xmf.drb</groupId>
                <artifactId>dhus-addon-sentinel-3-pdr</artifactId>
-               <version>1.0.0</version>
+               <version>1.0.1</version>
             </dependency>
          </dependencies>
       </profile>

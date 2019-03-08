@@ -3,12 +3,23 @@
 ]>
 <!--
   DHuS configuration
-  @attribute workingDir working directory path (default "_temp")
+  workingDir working directory path. default is "" which leads the DHuS to use a folder
+  "dhus" created in the default temporary-file directory (specified by the system property "java.io.tmpdir")
 -->
-<configuration xmlns="fr.gael.dhus.database.object.config"
+<configuration workingDir="" xmlns="fr.gael.dhus.database.object.config"
                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                xmlns:ds="org.dhus.store.datastore.config"
-               workingDir="">
+               xmlns:cron="fr.gael.dhus.database.object.config.cron"
+               xmlns:msg="fr.gael.dhus.database.object.config.messaging"
+               xmlns:network="fr.gael.dhus.database.object.config.network"
+               xmlns:product="fr.gael.dhus.database.object.config.product"
+               xmlns:search="fr.gael.dhus.database.object.config.search"
+               xmlns:server="fr.gael.dhus.database.object.config.server"
+               xmlns:system="fr.gael.dhus.database.object.config.system"
+               xmlns:scanner="fr.gael.dhus.database.object.config.scanner"
+               xmlns:evict="fr.gael.dhus.database.object.config.eviction"
+               xmlns:sync="fr.gael.dhus.database.object.config.synchronizer"
+               xmlns:source="fr.gael.dhus.database.object.config.source">
    <!-- Crons configuration. They all have two parameters:
       - active: defines if the cron is currently active or not
       - schedule: defines the schedule of the cron.
@@ -22,31 +33,29 @@
             - "0 0 3 ? * *": every day at 3 AM -->
    <crons>
       <!-- Cron used to synchronize local archive, defined in system/archive/@path -->
-      <archiveSynchronization active="false" schedule="0 0 0/5 ? * *"/>
+      <cron:archiveSynchronization active="false" schedule="0 0 0/5 ? * *"/>
       <!-- Cron used to clean database, like removing old statistics or old not confirmed users. -->
-      <cleanDatabase active="true" schedule="0 0 1 ? * *">
-         <!-- Definition of the time (in days) system is keeping statistics -->
-         <statistics keepPeriod="90" />
+      <cron:cleanDatabase active="true" schedule="0 0 1 ? * *">
          <!-- Definition of the time (in days) for user to confirm its registration -->
-         <tempUsers keepPeriod="10" />
-      </cleanDatabase>
+         <cron:tempUsers keepPeriod="10" />
+         <!-- Definition of the time (in days) system is keeping statistics -->
+         <cron:statistics keepPeriod="90" />
+      </cron:cleanDatabase>
       <!-- Cron used to dump database -->
-      <dumpDatabase active="true" schedule="0 0 3 ? * *" />
+      <cron:dumpDatabase active="true" schedule="0 0 3 ? * *" />
       <!-- Cron used to clean database dumps.
          - keep: defines how dumps are stored. -->
-      <cleanDatabaseDump active="true" schedule="0 0 4 ? * *" keep="10" />
-      <!-- Cron used to evict products when it is required -->
-      <eviction active="true" schedule="0 0 21 ? * * " />
+      <cron:cleanDatabaseDump active="true" schedule="0 0 4 ? * *" keep="10" />
       <!-- Cron used to execute user saved filescanners.
          - sourceRemove: defines if found products shall be removed from source -->
-      <fileScanners active="true" schedule="0 0 22 ? * *" sourceRemove="false"/>
+      <cron:fileScanners active="true" schedule="0 0 22 ? * *" sourceRemove="false"/>
       <!-- Cron used to execute user saved searches and send results to users -->
-      <searches active="true" schedule="0 0 5 ? * *" />
+      <cron:searches active="true" schedule="0 0 5 ? * *" />
       <!-- Cron used to send system logs.
          - addresses: logs recipients addresses. They shall be coma-separated -->
-      <sendLogs active="true" schedule="0 55 23 ? * *" addresses="dhus@gael.fr" />
+      <cron:sendLogs active="true" schedule="0 55 23 ? * *" addresses="dhus@gael.fr" />
       <!-- Cron used to check all system coherence, including database optimization -->
-      <systemCheck active="true" schedule="0 30 23 ? * *"/>
+      <cron:systemCheck active="true" schedule="0 30 23 ? * *"/>
    </crons>
    <messaging>
       <!-- Mail configuration. These values are used only at first launch of
@@ -54,40 +63,39 @@
          - onUserCreate: defines if system send mail when creating user
          - onUserUpdate: defines if system send mail when updating user
          - onUserDelete: defines if system send mail when deleting user -->
-      <mail onUserCreate="true" onUserUpdate="true" onUserDelete="true">
+      <msg:mail onUserCreate="true" onUserUpdate="true" onUserDelete="true">
          <!-- Mail server definition.
             - smtp: server address
             - port: server port
             - tls: defines if server is using TLS protocol
             - username and password : connection information -->
-         <server smtp="smtp.xxx.xx" port="587" tls="false" username="dhus@xxx.xx"
-            password="password">
+         <msg:server smtp="smtp.xxx.xx" port="587" tls="false" username="dhus@xxx.xx" password="password">
             <!-- Information used in "from" part of sent mails.
                - name: displayed name of "from" part
                - address: displayed address of "from" part -->
-            <from name="DHuS Support Team" address="dhus@xxx.xx" />
+            <msg:from name="DHuS Support Team" address="dhus@xxx.xx" />
             <!-- Defines the "reply to" address of sent mails -->
-            <replyTo>dhus@xxx.xx</replyTo>
-         </server>
-      </mail>
+            <msg:replyTo>dhus@xxx.xx</msg:replyTo>
+         </msg:server>
+      </msg:mail>
    </messaging>
    <!-- Network configuration -->
    <network>
-      <outbound>
-         <channel name="PriorityChannel" weight="75">
-            <classifier>
-               <includes>
-                  <include>
-                     <userEmailPattern>.*@gael.fr</userEmailPattern>
-                  </include>
-               </includes>
-            </classifier>
-         </channel>
-         <channel name="SelfRegisteredChannel" weight="25">
-            <defaultUserQuotas>
+      <network:outbound>
+         <network:channel name="PriorityChannel" weight="75">
+            <network:classifier>
+               <network:includes>
+                  <network:include>
+                     <network:userEmailPattern>.*@gael.fr</network:userEmailPattern>
+                  </network:include>
+               </network:includes>
+            </network:classifier>
+         </network:channel>
+         <network:channel name="SelfRegisteredChannel" weight="25">
+            <network:defaultUserQuotas>
                <!-- maxConcurrent defines the maximum simultaneous accepted
                    transfers. -->
-               <maxConcurrent>5</maxConcurrent>
+               <network:maxConcurrent>5</network:maxConcurrent>
                <!-- maxCount defines the maximum number of accepted transfers on
                    a customizable period.
                    "periodUnit" attribute defines the unit of the period. Possible
@@ -95,33 +103,33 @@
                    "MINUTES", "NANOSECONDS", "SECONDS".
                    "period" attribute is a sliding time window used to count
                    number of transfered product from now to the past period delay. -->
-               <maxCount period="1" periodUnit="DAYS">50</maxCount>
+               <network:maxCount period="1" periodUnit="DAYS">50</network:maxCount>
                <!-- Maximum accepted size of transfer file. -->
-               <maxSize>10737418240</maxSize> <!-- 10Gb -->
+               <network:maxSize>10737418240</network:maxSize> <!-- 10Gb -->
                <!-- maxCumulativeSize defines the maximum cumulated accepted
                    transfers size on a customizable period.
                    period/periodUnit attributes are defined in maxCount description. -->
                <!-- <maxCumulativeSize period="7" periodUnit="DAYS">1099511627776</maxCumulativeSize> -->
                <!-- maxBandwidth maximum bandwidth authorized for this channel. -->
-               <maxBandwidth>13107200</maxBandwidth> <!-- 100Mb/s -->
-            </defaultUserQuotas>
-         </channel>
-      </outbound>
-      <inbound>
-         <channel name="PriorityChannel" weight="75">
-            <classifier>
-               <includes>
-                  <include>
-                     <userEmailPattern>.*@gael.fr</userEmailPattern>
-                  </include>
-               </includes>
-            </classifier>
-         </channel>
-         <channel name="SelfRegisteredChannel" weight="25">
-            <defaultUserQuotas>
+               <network:maxBandwidth>13107200</network:maxBandwidth> <!-- 100Mb/s -->
+            </network:defaultUserQuotas>
+         </network:channel>
+      </network:outbound>
+      <network:inbound>
+         <network:channel name="PriorityChannel" weight="75">
+            <network:classifier>
+               <network:includes>
+                  <network:include>
+                     <network:userEmailPattern>.*@gael.fr</network:userEmailPattern>
+                  </network:include>
+               </network:includes>
+            </network:classifier>
+         </network:channel>
+         <network:channel name="SelfRegisteredChannel" weight="25">
+            <network:defaultUserQuotas>
                <!-- maxConcurrent defines the maximum simultaneous accepted
                    transfers. -->
-               <maxConcurrent>5</maxConcurrent>
+               <network:maxConcurrent>5</network:maxConcurrent>
                <!-- maxCount defines the maximum number of accepted transfers on
                    a customizable period.
                    "periodUnit" attribute defines the unit of the period. Possible
@@ -129,23 +137,21 @@
                    "MINUTES", "NANOSECONDS", "SECONDS".
                    "period" attribute is a sliding time window used to count
                    number of transfered product from now to the past period delay. -->
-               <maxCount period="1" periodUnit="DAYS">50</maxCount>
+               <network:maxCount period="1" periodUnit="DAYS">50</network:maxCount>
                <!-- Maximum accepted size of transfer file. -->
-               <maxSize>10737418240</maxSize> <!-- 10Gb -->
+               <network:maxSize>10737418240</network:maxSize> <!-- 10Gb -->
                <!-- maxCumulativeSize defines the maximum cumulated accepted
                    transfers size on a customizable period.
                    period/periodUnit attributes are defined in maxCount description. -->
                <!-- <maxCumulativeSize period="7" periodUnit="DAYS">1099511627776</maxCumulativeSize> -->
                <!-- maxBandwidth maximum bandwidth authorized for this channel. -->
-               <maxBandwidth>13107200</maxBandwidth> <!-- 100Mb/s -->
-            </defaultUserQuotas>
-         </channel>
-      </inbound>
+               <network:maxBandwidth>13107200</network:maxBandwidth> <!-- 100Mb/s -->
+            </network:defaultUserQuotas>
+         </network:channel>
+      </network:inbound>
    </network>
-   <!-- Products configuration
-      - publicData: defines if system is launched in public mode or not.
-      default is true -->
-   <products publicData="false">
+   <!-- Products configuration -->
+   <products>
       <!-- Download configuration
          - compressionLevel: is a value to build the Deflater, from 1 to 9.
          The compression level defines how rigorously the compressor looks
@@ -156,23 +162,23 @@
          the minimum level adds around 5% to the compression ratio.
          0 value means no compression.
          - checksumAlgorithms: shall be coma-separated -->
-      <download compressionLevel="4" checksumAlgorithms="MD5"/>
+      <product:download compressionLevel="4" checksumAlgorithms="MD5"/>
       <!-- Quicklook calculation parameters
          - height: height of generated quicklooks
          - width: width of generated quicklooks
          - cutting: allow system to cut image when processing quicklooks -->
-      <quicklook height="512" width="512" cutting="false" />
+      <product:quicklook height="512" width="512" cutting="false" />
       <!-- Thumbnail calculation parameters
          - height: height of generated thumbnails
          - width: width of generated thumbnails
          - cutting: allow system to cut image when processing thumbnails -->
-      <thumbnail height="64" width="64" cutting="false" />
+      <product:thumbnail height="64" width="64" cutting="false" />
    </products>
    <!-- Search configuration -->
    <search>
       <!-- Geocoder configuration
          - url: geocoder url -->
-      <geocoder url="http://nominatim.openstreetmap.org">
+      <search:geocoder url="http://nominatim.openstreetmap.org">
          <!-- Nominatim geocoder configuration
             - boundingBox: defines if the geocoder is querying only
             the bounding box of the matching place from the Nominatim Web
@@ -182,32 +188,27 @@
             composing the place's boundaries.
             - maxPointNumber: maximum number of points that can be returned
             for a polygon -->
-         <nominatim boundingBox="false" maxPointNumber="50" />
+         <search:nominatim boundingBox="false" maxPointNumber="50" />
          <!-- Geoname geocoder configuration
             - username: username used to connect to Geoname -->
-         <geoname username="username" />
-      </geocoder>
+         <search:geoname username="username" />
+      </search:geocoder>
       <!-- Odata configuration.
-         - maxRows: maximum rows returned by Odata Service -->
-      <odata maxRows="50" />
+         - defaultTop: default top used by Odata when none is given -->
+      <search:odata defaultTop="50" />
       <!-- Solr configuration.
          path: solr path
          core: solr core name
          schemaPath: solr schema path. Shall be empty.
          synonymPath: path of solr synonyms file -->
-      <solr path="&varFolder;/solr" core="dhus" schemaPath=""
-         synonymPath="" />
+      <search:solr path="&varFolder;/solr" core="dhus" schemaPath="" synonymPath="" />
    </search>
    <!-- Server configuration.-->
    <server>
       <!-- External url (protocol://host:port/path) is the url viewed by users
          Used in case of an apache proxy redirection for example
          Empty values mean that server values are those which are viewed by users -->
-      <external protocol="" host="" port="" path="" />
-      <!-- FTP server configuration.
-         port : ftp port
-         ftps : using ftps protocol or not -->
-      <ftp port="2121" ftps="false" passivePort="30200-30220" />
+      <server:external protocol="" host="" port="-1" path="" />
    </server>
    <!-- System configuration -->
    <system>
@@ -216,64 +217,146 @@
          his password. This shall be done in Management panel of GUI.
          If User is not existing, DHuS will create it with defined password.
          -->
-      <administrator name="root" password="password" />
+      <system:administrator name="root" password="password" />
       <!-- Definition of local archive path. -->
-      <archive path="&varFolder;/data">
-         <!-- Eviction configuration.
-            maxDiskUsage: the maximum disk usage that can be allowed for evictable products
-            maxEvictedProducts: the maximum evicted products when running an eviction
-            keepPeriod: the minimal time in days
-            trashPath: path where to move deleted products
-         -->
-         <eviction maxDiskUsage="80" maxEvictedProducts="1000"
-            keepPeriod="10" trashPath=""/>
-         <!-- According to the datastore new architecture the incoming 
-              folder is considered deprecated. -->
-         <incoming path="&varFolder;/incoming" maxFileNo="10" errorPath=""/>
-      </archive>
+      <system:archive errorPath="" />
       <!-- Definition of database path and where dumps are stored -->
-      <database path="&varFolder;/database/hsqldb"
-                dumpPath="&varFolder;/database_dump"
-                cryptType=""
-                cryptKey=""
-      />
+      <system:database JDBCDriver="org.hsqldb.jdbcDriver" hibernateDialect="org.hibernate.dialect.HSQLDialect" dumpPath="&varFolder;/database_dump"
+                       JDBCUrl="jdbc:hsqldb:file:&varFolder;/database/hsqldb;shutdown=true;hsqldb.write_delay=false;hsqldb.cache_size=1000000;hsqldb.cache_rows=200000;hsqldb.log_size=50;hsqldb.tx=mvcc;hsqldb.default_table_type=cached;hsqldb.nio_max_size=20480;hsqldb.large_data=true;" login="sa" password="" />
       <!-- Definition of system long name and short name. -->
-      <name long="Data Hub Service" short="DHuS" />
+      <system:name long="Data Hub Service" short="DHuS" />
       <!-- Processing configuration.
          corePoolSize: defines maximal number of active threads. Default is 1 -->
-      <processing corePoolSize="4" />
+      <system:processing corePoolSize="4" />
       <!-- Definition of support name and mail.
          - registrationMail: used to send the administrative registration information. If this
          field is not set, DHuS is using support mail.
          These values are used only at first launch of the system.
          They shall be modified in Management Panel if needed. -->
-      <support name="DHuS Support Team" mail="dhus@gael.fr" registrationMail="dhus@gael.fr" />
+      <system:support name="DHuS Support Team" mail="dhus@gael.fr" registrationMail="dhus@gael.fr" />
       <!-- Definition of tomcat path -->
-      <tomcat path="&varFolder;/tomcat" />
+      <system:tomcat path="&varFolder;/tomcat" />
       <!-- Executor (background service that executes synchronizers)
           It must be enabled if you want to use the synchronisation feature.
           batchMode: the executor will run the synchronizers until there is no more to synchronize. -->
-      <executor enabled="false" batchModeEnabled="false" />
+      <system:executor enabled="false" batchModeEnabled="false" />
+      <!-- Evicted products will be copied in the trashPath repository -->
+      <system:trashPath path="" />
    </system>
 
    <!-- DataStores Configuration -->
    <dataStores>
+      <!-- All DataStores share some attributes:
+         name: Name of this dataStore (must be unique)
+         readOnly: If this dataStore is read-only or read-write (default: read-write(false))
+         priority: Priority used to sort DataStores. A datastore with the lowest value will answer first (default: 100) -->
+
+      <!-- HFS DataStore configuration -->
       <ds:dataStore xsi:type="ds:hfsDataStoreConf"
                     name="synchronized-hfs-without-copy"
                     readOnly="true">
+         <!-- Path on disk to this HFS DataStore -->
          <ds:path>/remote/incoming/path</ds:path>
+         <!-- Maximum number of sub-folder in one folder (default: 10, at least 5)-->
          <ds:maxFileNo>10</ds:maxFileNo>
+         <!-- Maximum number of items in one folder (default: 1024, at least 10)-->
+         <ds:maxItems>1024</ds:maxItems>
       </ds:dataStore>
 
+      <!-- OpenStack DataStore configuration -->
       <ds:dataStore xsi:type="ds:openStackDataStoreConf"
                     name="secondaryDataStore"
                     readOnly="false">
+         <!-- Name of the provider -->
          <ds:provider>openstack-swift</ds:provider>
+         <!-- Identity is tenantName:Username -->
          <ds:identity>my-identity</ds:identity>
+         <!-- Password to access the Openstack storage -->
          <ds:credential>my-credential</ds:credential>
+         <!-- Url of the Openstack storage -->
          <ds:url>authentication-service-url</ds:url>
+         <!-- Target container on the Openstack storage -->
          <ds:container>container-name</ds:container>
+         <!-- Region of the target container on the Openstack storage -->
          <ds:region>RegionOne</ds:region>
       </ds:dataStore>
+
+      <!-- DHuS as DataStore -->
+      <ds:dataStore xsi:type="ds:remoteDhusDataStoreConf" name="RemoteDHuS">
+         <!-- URL to the OData V1 service endpoint -->
+         <ds:serviceUrl>http://REMOTE_DHUS/odata/v1</ds:serviceUrl>
+         <!-- Valid creadentials on the remote DHuS -->
+         <ds:login>root</ds:login>
+         <ds:password>password</ds:password>
+      </ds:dataStore>
    </dataStores>
+   <scanners></scanners>
+   <synchronizers>
+     <sync:synchronizer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="sync:smartProductSynchronizer">
+            <sync:id>0</sync:id>
+            <sync:label>example</sync:label>
+            <sync:serviceUrl>_deprecated_</sync:serviceUrl>
+            <sync:serviceLogin>_deprecated_</sync:serviceLogin>
+            <sync:servicePassword>_deprecated_</sync:servicePassword>
+            <sync:schedule>0 0/3 * * * ? *</sync:schedule>
+            <sync:active>false</sync:active>
+            <sync:created>2018-04-27T09:24:29.467Z</sync:created>
+            <sync:modified>2018-05-03T13:24:03.249Z</sync:modified>
+            <sync:pageSize>5</sync:pageSize>
+            <!-- Timeout -->
+            <sync:timeout>300000</sync:timeout>
+            <!-- Download attemps (per source) -->
+            <sync:attempts>10</sync:attempts>
+            <!-- Minimal download bandwidth (per download) before trying to switch source -->
+            <sync:threshold>204800</sync:threshold>
+            <!-- Synchronizer source list -->
+            <sync:sources>
+                <sync:source>
+                    <!-- Source id reference -->
+                    <sync:sourceId>0</sync:sourceId>
+                    <!-- Last creation date synchronizer index -->
+                    <sync:lastCreated>2018-04-23T15:59:06.732Z</sync:lastCreated>
+                </sync:source>
+                <sync:source>
+                    <sync:sourceId>1</sync:sourceId>
+                    <sync:lastCreated>1970-01-01T00:00:00.000Z</sync:lastCreated>
+                </sync:source>
+            </sync:sources>
+        </sync:synchronizer>
+   </synchronizers>
+   <evictions>
+       <!-- Eviction configurations.
+          name: name of the eviction
+          maxEvictedProducts: the maximum number of evicted products when running an eviction
+          keepPeriod: the minimal time between product creation and eviction
+          keepPeriodUnit: the time unit for the above value (default is DAYS)
+          filter: OData filter used to query products to evict
+          orderBy: OData ordering clause used to query products to evict
+          targetCollection: name of the collection owning products to evict
+          softEviction: boolean value (false : physical product and metadatas are deleted - true : metadatas are kept)
+          status: STOPPED or STARTED, to activate or stop and eviction
+       -->
+      <evict:eviction name="DefaultEviction" maxEvictedProducts="1000" keepPeriod="10" />
+   </evictions>
+   <sources>
+      <source:source>
+         <!-- Source id -->
+         <source:id>0</source:id>
+         <!-- Source URL -->
+         <source:url>http://dhusSource0/odata/v1</source:url>
+         <!-- Source authentication username -->
+         <source:username>usr_source_0</source:username>
+         <!-- Source authentication password -->
+         <source:password>pwd_source_0</source:password>
+         <!-- Max concurrent downloads -->
+         <source:maxDownload>5</source:maxDownload>
+      </source:source>
+      <source:source>
+         <source:id>1</source:id>
+         <source:url>http://dhusSource1/odata/v1</source:url>
+         <source:username>usr_source_1</source:username>
+         <source:password>pwd_source_1</source:password>
+         <source:maxDownload>2</source:maxDownload>
+      </source:source>
+   </sources>
 </configuration>

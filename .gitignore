@@ -1,3 +1,69 @@
+# Compiled source #
+###################
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+ 
+# Packages #
+############
+# it's better to unpack these files and commit the raw source
+# git has its own built in compression methods
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+ 
+# Logs and databases #
+######################
+*.log
+*.sql
+*.sqlite
+ 
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+ 
+# IDE files #
+#############
+.~lock.*
+.buildpath
+
+# Netbeans
+nbproject
+nbactions.xml
+nb-configuration.xml
+
+# Eclipse
+.classpath
+.project
+.settings/
+
+# Vi
+*.swp
+
+# Intellij
+.idea/
+*.iml
+*.iws
+
+# Maven
 /target/
+
+# others
 /etc/rules/
 /etc/task_tables/
+/etc/conf/menu.json
+/etc/conf/appconfig.json

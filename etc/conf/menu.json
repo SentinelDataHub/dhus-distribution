@@ -1,20 +1,22 @@
 {"sections":[
 {
 "title":"account",
-"icon":"exit-to-app",
+"icon":"perm-identity",
 "component":"login-container",
-"width":"500px",
+"width":"250px",
 "remoteUrl":""
+,"maxInstances":"1"
 },
 {
-"title":"search",
+"title":"Search Results",
 "icon":"search",
-"component":"combo-search-container",
-"width":"1500px",
+"component":"owc-combo-component",
+"width":"1000px",
 "remoteUrl":""
+,"maxInstances":"2"
 },
 {
-"title":"Data Visualization Components",
+"title":"Dashboard",
 "icon":"assessment",
 "component":"dataviz-container",
 "width":"500px",
@@ -24,7 +26,7 @@
 "title":"Settings",
 "icon":"settings",
 "component":"settings-panel",
-"width":"500px",
+"width":"280px",
 "remoteUrl":""
 },
 ]}

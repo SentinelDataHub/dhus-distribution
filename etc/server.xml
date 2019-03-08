@@ -21,6 +21,35 @@
          compressableMimeType="application/json,application/javascript,application/xhtml+xml,application/xml,text/html,text/xml,text/plain,text/javascript,text/css" />
       <Engine name="DHuS-Engine" defaultHost="localhost">
          <Host name="localhost" appBase="webapps" deployOnStartup="false" autoDeploy="false">
+
+            <!-- Tomcat cluster -->
+            <!--<Cluster className="org.apache.catalina.ha.tcp.SimpleTcpCluster" channelSendOptions="8">
+               <Manager className="org.apache.catalina.ha.session.DeltaManager"
+                  expireSessionsOnShutdown="false"
+                  notifyListenersOnReplication="true" />
+               <Channel className="org.apache.catalina.tribes.group.GroupChannel">
+                  <Membership className="org.apache.catalina.tribes.membership.McastService"
+                     address="228.0.0.4"
+                     port="45564"
+                     frequency="500"
+                     dropTime="3000" />
+                  <Receiver className="org.apache.catalina.tribes.transport.nio.NioReceiver"
+                     address="auto"
+                     port="4000"
+                     autoBind="100"
+                     selectorTimeout="5000"
+                     maxThreads="6" />
+                  <Sender className="org.apache.catalina.tribes.transport.ReplicationTransmitter">
+                     <Transport className="org.apache.catalina.tribes.transport.nio.PooledParallelSender" />
+                  </Sender>
+                  <Interceptor className="org.apache.catalina.tribes.group.interceptors.TcpFailureDetector" />
+                  <Interceptor className="org.apache.catalina.tribes.group.interceptors.MessageDispatch15Interceptor" />
+               </Channel>
+               <Valve className="org.apache.catalina.ha.tcp.ReplicationValve" filter="" />
+               <Valve className="org.apache.catalina.ha.session.JvmRouteBinderValve" />
+               <ClusterListener className="org.apache.catalina.ha.session.ClusterSessionListener" />
+            </Cluster>-->
+
             <Valve className="org.apache.catalina.valves.AccessLogValve"
                prefix="access_log-"
                suffix=".txt"
@@ -38,6 +67,58 @@
                pattern=".*"
                useLogger="true"
                enable="true" />
+
+            <!-- Quota on Processing filter aims to block users that perform heavy requests too often.
+               Attributes:
+               - enable="true|false" activate/deactivate the valve.
+               - pattern="regexp" filter to select which URLs activate quota on processing. Examples:
+                    Pattern to activate valve on OData and Seach requests only except downloads:
+                       '(.*/odata/v1/.*(?<!(\\$value)))|(.*/search\\?(q|rows|start|format|orderby).*)'
+                    Pattern to activate valve only when a user requests more than 100 entries:
+                       '.*(rows|\\$top)=0*[1-9]\\d{2,}.*'
+                    Omit this parameter and it will default to the second pattern.
+               - userSelection="comma separated list" containing the user identification criteria.
+                    Sources can be "LOGIN" and/or "IP".
+                    If LOGIN is listed, then user connection quotas will be collected by user name.
+                    If IP is listed, then it will be collected by internet address.
+                    When choosing both, quota will be gathered by a combination of both LOGIN/IP.
+                    If the same user request DHuS from 2 different internet address, its quotas will be decoupled.
+               - userWhiteList="comma separated list" of privileged users that are not under quota limitation.
+               - timeWindow="sliding window time in seconds" in which all the other limitations will be computed.
+                    This window shall be set to a value greater than the maximum amount of time a user request can spend.
+               - idleTimeBeforeReset="timespan in seconds"
+                    if a user is not active during this period, its quota will be reset.
+               - maxElapsedTimePerUserPerWindow="timespan in seconds" when a user request reaches this maximum CPU time,
+                    the quota system will block said user's requests until the rolling window releases that user.
+               - maxRequestNumberPerUserPerWindow="number" when users perform more than this number of requests,
+                    the system will block their requests until the rolling window releases them.
+               - maxUsedMemoryPerUserPerWindow="size in bytes" when a user's requests cumulated memory (RAM) usage
+                    exceeds this value, it will be block by the system until the rolling window releases that user.
+                    Warning: when the timeWindow is long, this value shall be adapted to avoid an abusive limitation.
+
+            Note that all these settings can be updated at runtime via the JMX API.
+            Changing these settings will reset all the previous quota metrics.
+
+            A fine-tunning of these value depends on server infrastructure and user traffic and usage.
+            I suggest to start with a small time window and large maximums:
+                 timeWindow                        15 mn
+                 idleTimeBeforeReset               15 mn
+                 maxElapsedTimePerUserPerWindow     5 mn
+                 maxRequestNumberPerUserPerWindow 900 (1 per second)
+                 maxUsedMemoryPerUserPerWindow     50 GiB
+
+            When max limit are set to a value < 0, the max is ignored, when value is set to 0 it is always blocking.
+
+            -->
+            <Valve className="fr.gael.dhus.server.http.valve.processings.ProcessingValve"
+               enable="false"
+               userSelection="LOGIN,IP"
+               userWhiteList=""
+               timeWindow="900"
+               idleTimeBeforeReset="900"
+               maxElapsedTimePerUserPerWindow="300"
+               maxRequestNumberPerUserPerWindow="900"
+               maxUsedMemoryPerUserPerWindow="53687091200" />
          </Host>
       </Engine>
    </Service>

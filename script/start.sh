@@ -17,14 +17,7 @@
 #
 # Archive.forceReindex=true|false (default=false) force all the products indexes being re-indexed.
 #
-# Archive.incoming.relocate=true|false (default=false) force the relocation of all the products of incoming
-#
-# Archive.incoming.relocate.path=/path/to/relocation (default="") give the new location path to relocate incoming directory.
-#                              If no pas is provided, incoming will be relocated in its current directory.
-#
 # Archive.processings.clean=true|false (default=false) clean all the interrupted processings instead of recover them.
-#
-# force.public=true|false (default=false) force all the product contained into DHuS become public.
 #
 # Archive.synchronizeLocal=true|false (default=false) force re-synchronization of local archive path at system startup.
 #
@@ -35,18 +28,23 @@
 # dhus.solr.reindex=true|false (default=false) recreate the Solr index from the database.
 # action.record.inactive=true|false (default=false) full deactivates read/write statistics.
 #
-# dhus.scalability.active=true|false (default=false) activates scalability in DHuS
-# dhus.scalability.local.protocol=   (default=http) local protocol to access this DHuS
-# dhus.scalability.local.ip=         local ip to access this DHuS
-# dhus.scalability.local.port=       (default=8080) local port to access this DHuS
-# dhus.scalability.local.path=       local path to access this DHuS
-# dhus.scalability.replicaId=1       (default=-1) replica's id; if not used, this node is considered as master
-# dhus.scalability.dbsync.master=    URL of dhus master (poitning on root path)
-# dhus.scalability.dbsync.clear=     (default=false) clear every system record about db synchronization stored in db (not replicated data)
-#
 # dhus.replication.exitonfailure=true|false (default=true) shutdown or not the replica on replication failure.
 #
 # dhus.sync.download_attempts=       (default=10) number of download attempts (-1 for infinite, must be at least 1)
+#
+# dhus.solr.max.index.try=           (default=1) maximum tries for Solr to index a product
+#
+# fr.gael.streams.tmpdir=            (default is tomcat temp directory) directory where cached NETCDF files will be written
+#
+# All parameters of dhus.saml are required to let SSO work correctly except the choice between dhus.saml.idp.file & dhus.saml.idp.url
+# dhus.saml.idp.name=                name of the IDP
+# dhus.saml.idp.file=                path to the XML metadata file of IDP. [Use only one between file or url]
+# dhus.saml.idp.url=                 URL to the XML metadata file of IDP.  [Use only one between file or url]
+# dhus.saml.sp.id=                   EntityID to register DHUS as a Service Provider(SP) on IDP.
+# dhus.saml.keystore.file=           KeyStore used to encrypt the data between SP and IDP.
+# dhus.saml.keystore.storePass=      Password of the KeyStore.
+# dhus.saml.keystore.defaultKey=     Key used for the encryption.
+# dhus.saml.keystore.defaultPassword= Password of this key.
 #
 # Required properties:
 # --------------------
@@ -59,6 +57,7 @@
 #
 # -Dsun.zip.disableMemoryMapping=true currently mandatory to avoid a crash in zip library usage.
 #
+# -Djava.util.logging.manager=org.apache.logging.log4j.jul.LogManager sets up the java.util.logging to Log4J bridge
 #
 
 check_dir ()
@@ -151,13 +150,12 @@ then
    fi
 fi
 
-java -server -XX:MaxPermSize=256m -Xms12g -Xmx12g          \
+java -server -Xss4m -Xms12g -Xmx12g \
      -Djava.library.path=${NATIVE_LIBRARIES}               \
      -Duser.timezone=UTC                                   \
      -Dcom.sun.media.jai.disableMediaLib=true              \
      -Dsun.zip.disableMemoryMapping=true                   \
-     -Ddhus.scalability.active=false                       \
-     -Ddhus.scalability.local.ip=127.0.0.1   \
+     -Djava.util.logging.manager=org.apache.logging.log4j.jul.LogManager  \
      -cp "etc:lib/*" fr.gael.dhus.DHuS &
 
 PID=$!
