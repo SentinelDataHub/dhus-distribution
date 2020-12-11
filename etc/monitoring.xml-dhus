@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+   Data Hub Service (DHuS) - For Space data distribution.
+   Copyright (C) 2019 GAEL Systems
+
+   This file is part of DHuS software sources.
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program. If not, see <http://www.gnu.org/licenses/>.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:metrics="http://www.ryantenney.com/schema/metrics"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+           http://www.ryantenney.com/schema/metrics http://www.ryantenney.com/schema/metrics/metrics.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd">
+
+    <!-- Creates a MetricRegistry bean, do not change its ID -->
+    <metrics:metric-registry id="DHuSMetrics" />
+
+    <!-- Registers BeanPostProcessors with Spring which proxy beans and capture metrics -->
+    <metrics:annotation-driven metric-registry="DHuSMetrics" expose-proxy="true" />
+
+    <!-- Reporter definiton. -->
+
+    <!-- Report metrics to an embedded storage, attributes are:
+          - period (required) reporting rate
+          - filter (optional) filter pattern on metric names
+          - filter-ref (optional) ref to a MetricFilter bean
+          - duration-unit (optional) unit for durations (defaults to milliseconds)
+          - rate-unit (optional) unit for rates (defaults to seconds)
+    -->
+    <metrics:reporter type="dhus-reporter" metric-registry="DHuSMetrics" period="1m" />
+    <!-- Configure embedded metrics storage -->
+    <bean id="metrics_storage" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="url" value="jdbc:hsqldb:mem:." />
+    </bean>
+    <bean id="jdbi" class="org.jdbi.v3.spring4.JdbiFactoryBean">
+        <property name="dataSource" ref="metrics_storage" />
+        <property name="autoInstallPlugins" value="true" />
+    </bean>
+    <bean id="service" class="org.dhus.metrics.embed.MetricsService">
+        <constructor-arg ref="jdbi" />
+        <constructor-arg value="15" />
+        <constructor-arg value="MINUTES" />
+    </bean>
+    <!-- Configure embedded metrics storage OData API -->
+
+    <!-- Download event collector, a meter named `download.<itemclass>.meter` ItemClass tag name precision can be COARSE (default) or FINE -->
+    <!--<bean name="download_collector" class="org.dhus.metrics.DownloadMetrics.Item">
+        <property name="itemClassNamePrecision" value="FINE" />
+    </bean>-->
+    <!-- To record both the item class and the username, a meter named `download.<username>.<itemclass>.meter` ItemClass tag name precision can be COARSE (default) or FINE -->
+    <!--<bean name="download_collector" class="org.dhus.metrics.DownloadMetrics.ItemAndUser">
+        <property name="itemClassNamePrecision" value="FINE" />
+    </bean>-->
+    <!-- To record both the item class and the username, a meter named `download.<username>.meter` -->
+    <!--<bean name="download_collector" class="org.dhus.metrics.DownloadMetrics.User" />-->
+    <!-- To record both the item class and the username, a meter named `download.meter` -->
+    <bean name="download_collector" class="org.dhus.metrics.DownloadMetrics.Glob" />
+
+    <!-- Register metric beans (Optional) -->
+    <!-- The metrics in this example require artifact metrics-jvm -->
+    <!--
+    <metrics:register metric-registry="DHuSMetrics">
+        <bean metrics:name="jvm.gc" class="com.codahale.metrics.jvm.GarbageCollectorMetricSet" />
+        <bean metrics:name="jvm.memory" class="com.codahale.metrics.jvm.MemoryUsageGaugeSet" />
+        <bean metrics:name="jvm.thread-states" class="com.codahale.metrics.jvm.ThreadStatesGaugeSet" />
+        <bean metrics:name="jvm.fd.usage" class="com.codahale.metrics.jvm.FileDescriptorRatioGauge" />
+    </metrics:register>
+    -->
+</beans>

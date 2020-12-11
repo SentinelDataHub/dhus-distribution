@@ -46,9 +46,6 @@
       <!-- Cron used to clean database dumps.
          - keep: defines how dumps are stored. -->
       <cron:cleanDatabaseDump active="true" schedule="0 0 4 ? * *" keep="10" />
-      <!-- Cron used to execute user saved filescanners.
-         - sourceRemove: defines if found products shall be removed from source -->
-      <cron:fileScanners active="true" schedule="0 0 22 ? * *" sourceRemove="false"/>
       <!-- Cron used to execute user saved searches and send results to users -->
       <cron:searches active="true" schedule="0 0 5 ? * *" />
       <!-- Cron used to send system logs.
@@ -242,19 +239,47 @@
       <system:executor enabled="false" batchModeEnabled="false" />
       <!-- Evicted products will be copied in the trashPath repository -->
       <system:trashPath path="" />
+
+      <!-- Transformation configuration
+        - isMaster: must be set to true if this instance should run transformations and ingest resulting products (default: false)
+        - interval: how often the instance should run the transformation management routine, in milliseconds (default: 60000)
+        - targetDataStore: data store in which to ingest transformed products (default: all data stores)
+        - ingestCorePoolSize: how many transformed products can be ingested in parallel (default: 4)
+       -->
+      <system:transformation
+        isMaster="true"
+        interval="60000"
+        targetDataStore="transformationDataStore"
+        ingestCorePoolSize="4">
+
+        <!-- Transformer quotas configuration (optional)
+          - transformerName: name of the transformer on which to apply quotas (required)
+          - maxPendingRequests: how many transformations can be pending at once for this transformer (default: 4)
+          - maxRunningRequests: how many transformations can be running ot once for this transformer (default: 4)
+        -->
+        <system:transformerQuotas transformerName="MyTransformer" maxPendingRequests="32" maxRunningRequests="4"/>
+
+        <!-- User quotas configuration (optional)
+          - maxParallelTransformationsPerUser: how many transformations can users request in parallel (required)
+        -->
+        <system:userQuotas maxParallelTransformationsPerUser="2"/>
+      </system:transformation>
    </system>
 
    <!-- DataStores Configuration -->
    <dataStores>
       <!-- All DataStores share some attributes:
          name: Name of this dataStore (must be unique)
-         readOnly: If this dataStore is read-only or read-write (default: read-write(false))
+         restriction: (default: none)
+           - none             read-write
+           - readOnly         read-only
+           - referencesOnly   add/remove references to data only, does not allow addition/removal of the data itself
          priority: Priority used to sort DataStores. A datastore with the lowest value will answer first (default: 100) -->
 
       <!-- HFS DataStore configuration -->
       <ds:dataStore xsi:type="ds:hfsDataStoreConf"
                     name="synchronized-hfs-without-copy"
-                    readOnly="true">
+                    restriction="referencesOnly">
          <!-- Path on disk to this HFS DataStore -->
          <ds:path>/remote/incoming/path</ds:path>
          <!-- Maximum number of sub-folder in one folder (default: 10, at least 5)-->
@@ -266,7 +291,7 @@
       <!-- OpenStack DataStore configuration -->
       <ds:dataStore xsi:type="ds:openStackDataStoreConf"
                     name="secondaryDataStore"
-                    readOnly="false">
+                    restriction="none">
          <!-- Name of the provider -->
          <ds:provider>openstack-swift</ds:provider>
          <!-- Identity is tenantName:Username -->

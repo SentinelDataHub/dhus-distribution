@@ -7,6 +7,7 @@
          maxThreads="400"
          keepAliveTimeout="2000"
          URIEncoding="ISO-8859-1"
+         relaxedQueryChars="^{}[]|&quot;"
          compression="on"
          compressionMinSize="1024"
          compressableMimeType="application/json,application/javascript,application/xhtml+xml,application/xml,text/html,text/xml,text/plain,text/javascript,text/css" />
@@ -50,6 +51,10 @@
                <ClusterListener className="org.apache.catalina.ha.session.ClusterSessionListener" />
             </Cluster>-->
 
+            <!-- Monitoring: metrics on HTTP accesses -->
+            <!--<Valve className="org.dhus.metrics.MetricsValve" />-->
+            <!--<Valve className="org.dhus.metrics.HeavyMetricsValve" />--> <!-- Metrics per each and every user, use only if this instance has a small set of users! -->
+
             <Valve className="org.apache.catalina.valves.AccessLogValve"
                prefix="access_log-"
                suffix=".txt"
@@ -67,6 +72,9 @@
                pattern=".*"
                useLogger="true"
                enable="true" />
+
+			<!-- Valve used to display the potential exception thrown by processing quota valve in HTML -->
+			<Valve className="org.apache.catalina.valves.ErrorReportValve"/>
 
             <!-- Quota on Processing filter aims to block users that perform heavy requests too often.
                Attributes:

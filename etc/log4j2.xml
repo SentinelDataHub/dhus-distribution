@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration monitorInterval="300">
- 	<Properties>
-		<Property name="pattern"    >[$${sys:fr.gael.dhus.version}][%d{DEFAULT}{UTC}][%-5p] %m (%file:%line - %t)%n%throwable </Property>
+	<Properties>
+		<Property name="pattern">[$${sys:fr.gael.dhus.version}][%d{DEFAULT}{UTC}][%-5p] %m (%file:%line - %t)%n%throwable</Property>
 	</Properties>
 	<Appenders>
 		<Console name="stdout" target="SYSTEM_OUT">
 			<PatternLayout pattern="${pattern}" />
 			<Filters>
-			    <ThresholdFilter level="DEBUG"/>
-			    <ThresholdFilter level="WARN" onMatch="DENY" onMismatch="NEUTRAL"/>
+				<ThresholdFilter level="DEBUG"/>
+				<ThresholdFilter level="WARN" onMatch="DENY" onMismatch="NEUTRAL"/>
 			</Filters>
 		</Console>
 		<Console name="stderr" target="SYSTEM_ERR">
 			<PatternLayout pattern="${pattern}" />
 			<Filters>
-			    <ThresholdFilter level="WARN"/>
+				<ThresholdFilter level="WARN"/>
 			</Filters>
 		</Console>
 		<RollingFile name="RollingFile" fileName="dhus.log"
@@ -26,7 +26,7 @@
 				<TimeBasedTriggeringPolicy interval="6" modulate="true" />
 			</Policies>
 			<Filters>
-			    <ThresholdFilter level="DEBUG"/>
+				<ThresholdFilter level="DEBUG"/>
 			</Filters>
 		</RollingFile>
 	</Appenders>
@@ -35,6 +35,7 @@
 		<logger name="fr.gael.drb.query.FunctionCallExpression" level="debug"/>
 		<logger name="org.apache.cxf.jaxrs.utils.JAXRSUtils" level="error"/>
 		<logger name="org.apache.solr" level="error"/>
+		<logger name="org.hibernate.orm.deprecation" level="error"/><!-- Hibernate deprecation warnings -->
 		<Root level="info">
 			<AppenderRef ref="stderr" />
 			<AppenderRef ref="stdout" />
