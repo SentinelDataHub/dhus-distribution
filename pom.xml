@@ -253,6 +253,16 @@
       </plugins>
    </build>
 
+   <pluginRepositories>
+      <pluginRepository>
+         <id>external dependencies</id>
+<!-- repository https://copernicus.serco.eu/repository/nexus/content/repositories/releases
+     used to proxy gael's resources requires credentials
+     Using alternative source repository. -->
+         <url>https://repository.gael-systems.com/repository/public</url>
+      </pluginRepository>
+   </pluginRepositories>
+
    <repositories>
       <repository>
          <id>external dependencies</id>
