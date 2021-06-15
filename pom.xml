@@ -9,13 +9,13 @@
 
    <properties>
       <!-- Customize here the components version to be embedded into this distribution  -->
-      <dhus.core>1.11.0-osf</dhus.core>
+      <dhus.core>1.11.1-osf</dhus.core>
 
       <dhus.webclient>1.0.3-osf</dhus.webclient>
 
       <dhus.addon.sentinel_1>1.0.20-osf</dhus.addon.sentinel_1>
       <dhus.addon.sentinel_2>1.4.7-osf</dhus.addon.sentinel_2>
-      <dhus.addon.sentinel_3>1.0.26-osf</dhus.addon.sentinel_3>
+      <dhus.addon.sentinel_3>1.0.27-osf</dhus.addon.sentinel_3>
       <dhus.addon.sentinel_5p>1.0.12-osf</dhus.addon.sentinel_5p>
       <dhus.addon.sentinel_aux>1.0.9-osf</dhus.addon.sentinel_aux>
       <dhus.addon.cosmo>1.0.9-osf</dhus.addon.cosmo>
@@ -32,7 +32,7 @@
 
    <groupId>fr.gael.dhus</groupId>
    <artifactId>dhus-software</artifactId>
-   <version>2.7.7-osf</version>
+   <version>2.7.8-osf</version>
    <packaging>pom</packaging>
 
    <name>DHuS - Software Distribution</name>
@@ -270,6 +270,10 @@
      used to proxy gael's resources requires credentials
      Using alternative source repository. -->
          <url>https://repository.gael-systems.com/repository/public</url>
+      </repository>
+      <repository>
+         <id>osf-releases</id>
+         <url>https://copernicus.serco.eu/repository/nexus/content/repositories/OSF_releases</url>
       </repository>
    </repositories>
 
