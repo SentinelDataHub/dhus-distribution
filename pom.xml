@@ -9,7 +9,7 @@
 
    <properties>
       <!-- Customize here the components version to be embedded into this distribution  -->
-      <dhus.core>1.11.1-osf</dhus.core>
+      <dhus.core>1.11.2-osf</dhus.core>
 
       <dhus.webclient>1.0.3-osf</dhus.webclient>
 
@@ -32,7 +32,7 @@
 
    <groupId>fr.gael.dhus</groupId>
    <artifactId>dhus-software</artifactId>
-   <version>2.7.8-osf</version>
+   <version>2.7.9-osf</version>
    <packaging>pom</packaging>
 
    <name>DHuS - Software Distribution</name>
