@@ -9,7 +9,7 @@
 
    <properties>
       <!-- Customize here the components version to be embedded into this distribution  -->
-      <dhus.core>1.11.2-osf</dhus.core>
+      <dhus.core>1.11.3-osf</dhus.core>
 
       <dhus.webclient>1.0.3-osf</dhus.webclient>
 
@@ -32,7 +32,7 @@
 
    <groupId>fr.gael.dhus</groupId>
    <artifactId>dhus-software</artifactId>
-   <version>2.7.9-osf</version>
+   <version>2.7.10-osf</version>
    <packaging>pom</packaging>
 
    <name>DHuS - Software Distribution</name>
@@ -256,9 +256,6 @@
    <pluginRepositories>
       <pluginRepository>
          <id>external dependencies</id>
-<!-- repository https://copernicus.serco.eu/repository/nexus/content/repositories/releases
-     used to proxy gael's resources requires credentials
-     Using alternative source repository. -->
          <url>https://repository.gael-systems.com/repository/public</url>
       </pluginRepository>
    </pluginRepositories>
@@ -266,14 +263,11 @@
    <repositories>
       <repository>
          <id>external dependencies</id>
-<!-- repository https://copernicus.serco.eu/repository/nexus/content/repositories/releases
-     used to proxy gael's resources requires credentials
-     Using alternative source repository. -->
          <url>https://repository.gael-systems.com/repository/public</url>
       </repository>
       <repository>
          <id>osf-releases</id>
-         <url>https://copernicus.serco.eu/repository/nexus/content/repositories/OSF_releases</url>
+         <url>https://nexus-repository.onda-dias.eu/repository/OSF_releases/</url>
       </repository>
    </repositories>
 
@@ -282,9 +276,7 @@
          <uniqueVersion>true</uniqueVersion>
          <id>osf-delivery</id>
          <name>OSF Releases Repository</name>
-         <url>
-            https://copernicus.serco.eu/repository/nexus/content/repositories/OSF_releases
-         </url>
+         <url>https://nexus-repository.onda-dias.eu/repository/OSF_releases/</url>
          <layout>default</layout>
       </repository>
    </distributionManagement>
