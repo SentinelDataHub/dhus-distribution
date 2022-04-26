@@ -224,4 +224,20 @@
         <persistence strategy="none" />
     </cache>
 
+   <cache name="saml_saved_requests"
+          eternal="false"
+          maxEntriesLocalHeap="30000"
+          maxEntriesLocalDisk="3000"
+          timeToIdleSeconds="0"
+          timeToLiveSeconds="3600"
+          memoryStoreEvictionPolicy="LFU">
+        <bootstrapCacheLoaderFactory
+            class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory"
+            properties="bootstrapAsynchronously=true"
+            propertySeparator="," />
+        <cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
+                                   properties="replicateAsynchronously=false"/>
+      <persistence strategy="none" />
+   </cache>
+
 </ehcache>

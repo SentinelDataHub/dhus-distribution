@@ -5,4 +5,4 @@ if [ $# -ne 4 ]; then
   exit 1
 fi
 
-java -cp "etc:lib/*" org.dhus.migration.DataBaseMigrationTool "$1" "$2" "$3" "$4"
+java -Dlog4j.configurationFile=etc/log4j2.xml -cp "lib/*" org.dhus.migration.DataBaseMigrationTool "$1" "$2" "$3" "$4"

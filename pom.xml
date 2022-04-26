@@ -9,17 +9,18 @@
 
    <properties>
       <!-- Customize here the components version to be embedded into this distribution  -->
-      <dhus.core>1.11.3-osf</dhus.core>
 
-      <dhus.webclient>1.0.3-osf</dhus.webclient>
+      <dhus.core>2.0.8-osf</dhus.core>
 
-      <dhus.addon.sentinel_1>1.0.20-osf</dhus.addon.sentinel_1>
-      <dhus.addon.sentinel_2>1.4.7-osf</dhus.addon.sentinel_2>
-      <dhus.addon.sentinel_3>1.0.27-osf</dhus.addon.sentinel_3>
-      <dhus.addon.sentinel_5p>1.0.12-osf</dhus.addon.sentinel_5p>
-      <dhus.addon.sentinel_aux>1.0.9-osf</dhus.addon.sentinel_aux>
-      <dhus.addon.cosmo>1.0.9-osf</dhus.addon.cosmo>
-      <dhus.addon.smos>1.0.3-osf</dhus.addon.smos>
+      <dhus.webclient>1.2.1-osf</dhus.webclient>
+
+      <dhus.addon.sentinel_1>1.1.2-osf</dhus.addon.sentinel_1>
+      <dhus.addon.sentinel_2>1.5.1-osf</dhus.addon.sentinel_2>
+      <dhus.addon.sentinel_3>1.1.3-osf</dhus.addon.sentinel_3>
+      <dhus.addon.sentinel_5p>1.0.15-osf</dhus.addon.sentinel_5p>
+      <dhus.addon.sentinel_aux>1.1.0-osf</dhus.addon.sentinel_aux>
+      <dhus.addon.cosmo>1.0.12-osf</dhus.addon.cosmo>
+      <dhus.addon.smos>1.0.4-osf</dhus.addon.smos>
       <dhus.addon.landsat_8>1.0.3-osf</dhus.addon.landsat_8>
       <dhus.addon.pleiades>1.0.2-osf</dhus.addon.pleiades>
 
@@ -32,7 +33,7 @@
 
    <groupId>fr.gael.dhus</groupId>
    <artifactId>dhus-software</artifactId>
-   <version>2.7.10-osf</version>
+   <version>3.0.6-osf</version>
    <packaging>pom</packaging>
 
    <name>DHuS - Software Distribution</name>
@@ -253,22 +254,31 @@
       </plugins>
    </build>
 
+
    <pluginRepositories>
       <pluginRepository>
-         <id>external dependencies</id>
-         <url>https://repository.gael-systems.com/repository/public</url>
+         <id>osf-public</id>
+         <name>OSF Public Repository</name>
+         <url>https://nexus-repository.onda-dias.eu/repository/Public_Repositories/</url>
+         <layout>default</layout>      
       </pluginRepository>
    </pluginRepositories>
 
    <repositories>
       <repository>
-         <id>external dependencies</id>
-         <url>https://repository.gael-systems.com/repository/public</url>
+         <id>osf-public</id>
+         <name>OSF Public Repository</name>
+         <url>https://nexus-repository.onda-dias.eu/repository/Public_Repositories/</url>
+         <layout>default</layout>      
       </repository>
+
       <repository>
-         <id>osf-releases</id>
+         <id>osf-delivery</id>
+         <name>OSF Releases Repository</name>
          <url>https://nexus-repository.onda-dias.eu/repository/OSF_releases/</url>
+         <layout>default</layout>
       </repository>
+
    </repositories>
 
    <distributionManagement>
@@ -278,7 +288,7 @@
          <name>OSF Releases Repository</name>
          <url>https://nexus-repository.onda-dias.eu/repository/OSF_releases/</url>
          <layout>default</layout>
-      </repository>
+      </repository>   
    </distributionManagement>
 
    <scm>
