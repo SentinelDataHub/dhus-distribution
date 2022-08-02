@@ -1,8 +1,8 @@
 #!/bin/sh
 BASENAME=`basename $0`
 SCRIPT_DIR=`dirname $0`
-LOG_DIR="$SCRIPT_DIR/../logs"
-TOMCAT_HOME="$SCRIPT_DIR/../var/tomcat/webapps/ROOT/home/"
+LOG_DIR="$SCRIPT_DIR/directory/to/logs"
+TOMCAT_HOME="$SCRIPT_DIR/directory/to/tomcat/webapps/ROOT/home/"
 
 (
    cd $SCRIPT_DIR
@@ -20,7 +20,7 @@ TOMCAT_HOME="$SCRIPT_DIR/../var/tomcat/webapps/ROOT/home/"
       if [ -f dhus.html ] && [ -d $TOMCAT_HOME ]
       then
          echo "Waiting Dhus completion initialization."
-         ( sed -r '/Server is ready.../q' <( exec tail -n +0 -f $LOG_DIR/logs.txt ); kill $! ) &> /dev/null
+         sed -r '/Server is ready.../q' < exec tail -n +0 -f $LOG_DIR/logs.txt ; kill $!  &> /dev/null
          echo "Copying extra resources into Dhus directories"
          cp -f dhus.html $TOMCAT_HOME
       fi

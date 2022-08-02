@@ -9,18 +9,18 @@
 
    <properties>
       <!-- Customize here the components version to be embedded into this distribution  -->
+      <dhus.core>2.1.10-osf</dhus.core>
 
-      <dhus.core>2.0.8-osf</dhus.core>
-
-      <dhus.webclient>1.2.1-osf</dhus.webclient>
+      <dhus.webclient>1.2.0-osf</dhus.webclient>
 
       <dhus.addon.sentinel_1>1.1.2-osf</dhus.addon.sentinel_1>
       <dhus.addon.sentinel_2>1.5.1-osf</dhus.addon.sentinel_2>
-      <dhus.addon.sentinel_3>1.1.3-osf</dhus.addon.sentinel_3>
-      <dhus.addon.sentinel_5p>1.0.15-osf</dhus.addon.sentinel_5p>
+      <dhus.addon.sentinel_3>1.1.4-osf</dhus.addon.sentinel_3>
+      <dhus.addon.sentinel_5p>1.0.16-osf</dhus.addon.sentinel_5p>
       <dhus.addon.sentinel_aux>1.1.0-osf</dhus.addon.sentinel_aux>
       <dhus.addon.cosmo>1.0.12-osf</dhus.addon.cosmo>
       <dhus.addon.smos>1.0.4-osf</dhus.addon.smos>
+
       <dhus.addon.landsat_8>1.0.3-osf</dhus.addon.landsat_8>
       <dhus.addon.pleiades>1.0.2-osf</dhus.addon.pleiades>
 
@@ -33,7 +33,7 @@
 
    <groupId>fr.gael.dhus</groupId>
    <artifactId>dhus-software</artifactId>
-   <version>3.0.6-osf</version>
+   <version>3.1.4-osf</version>
    <packaging>pom</packaging>
 
    <name>DHuS - Software Distribution</name>
@@ -254,7 +254,6 @@
       </plugins>
    </build>
 
-
    <pluginRepositories>
       <pluginRepository>
          <id>osf-public</id>
@@ -290,18 +289,6 @@
          <layout>default</layout>
       </repository>   
    </distributionManagement>
-
-   <scm>
-      <connection>scm:git:https://github.com/SentinelDataHub/dhus-distribution</connection>
-      <developerConnection>scm:git:https://github.com/SentinelDataHub/dhus-distribution</developerConnection>
-      <tag>HEAD</tag>
-      <url>https://github.com/SentinelDataHub/dhus-distribution</url>
-   </scm>
-
-   <issueManagement>
-      <system>Jira</system>
-      <url>https://copernicus.serco.eu/jira-osf</url>
-   </issueManagement>
 
    <profiles>
       <profile>

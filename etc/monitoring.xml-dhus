@@ -23,9 +23,9 @@
        xmlns:metrics="http://www.ryantenney.com/schema/metrics"
        xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="
-           http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+           http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
            http://www.ryantenney.com/schema/metrics http://www.ryantenney.com/schema/metrics/metrics.xsd
-           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd">
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
     <!-- Creates a MetricRegistry bean, do not change its ID -->
     <metrics:metric-registry id="DHuSMetrics" />
@@ -47,10 +47,17 @@
     <bean id="metrics_storage" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="url" value="jdbc:hsqldb:mem:." />
     </bean>
+    <!-- Configure database into a file -->
+    <!-- <bean id="metrics_storage" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="url" value="jdbc:hsqldb:file:/path/to/store/databaseName" /><!-- HSQL DB in file -->
+	</bean> -->
+    
     <bean id="jdbi" class="org.jdbi.v3.spring4.JdbiFactoryBean">
         <property name="dataSource" ref="metrics_storage" />
         <property name="autoInstallPlugins" value="true" />
     </bean>
+    
+    <!-- Define the service and the period for storing metrics information -->
     <bean id="service" class="org.dhus.metrics.embed.MetricsService">
         <constructor-arg ref="jdbi" />
         <constructor-arg value="15" />

@@ -23,9 +23,9 @@
        xmlns:metrics="http://www.ryantenney.com/schema/metrics"
        xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="
-           http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+           http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
            http://www.ryantenney.com/schema/metrics http://www.ryantenney.com/schema/metrics/metrics.xsd
-           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd">
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
     <!-- Creates a MetricRegistry bean, do not change its ID -->
     <metrics:metric-registry id="DHuSMetrics" />
@@ -83,6 +83,14 @@
                 <entry key="dhus_inst" value="frenchub_fe_01" />
             </map>
         </constructor-arg>
+    </bean>
+    
+    <!-- Configure the service for OData access -->
+    <bean id="service" class="org.dhus.metrics.external.influx.InfluxMetricService">
+        <constructor-arg value="http://<influx_server>:<port>" /> <!-- url of the influxDB-->
+        <constructor-arg value="<user>"/> <!-- username on InfluxDB -->
+        <constructor-arg value="<password>"/> <!-- password on influx DB -->
+        <constructor-arg value="<influx_database_name>"/> <!-- database name on InfluxDB -->
     </bean>
 
     <!-- A default template provider bean is already defined in the dhus-core, there is no need to

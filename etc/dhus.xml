@@ -19,7 +19,8 @@
                xmlns:scanner="fr.gael.dhus.database.object.config.scanner"
                xmlns:evict="fr.gael.dhus.database.object.config.eviction"
                xmlns:sync="fr.gael.dhus.database.object.config.synchronizer"
-               xmlns:source="fr.gael.dhus.database.object.config.source">
+               xmlns:source="fr.gael.dhus.database.object.config.source"
+               xmlns:ps="fr.gael.dhus.database.object.config.productsource">
    <!-- Crons configuration. They all have two parameters:
       - active: defines if the cron is currently active or not
       - schedule: defines the schedule of the cron.
@@ -50,7 +51,7 @@
       <cron:searches active="true" schedule="0 0 5 ? * *" />
       <!-- Cron used to send system logs.
          - addresses: logs recipients addresses. They shall be coma-separated -->
-      <cron:sendLogs active="true" schedule="0 55 23 ? * *" addresses="dhus@gael.fr" />
+      <cron:sendLogs active="true" schedule="0 55 23 ? * *" addresses="dhus@xxx.xx" />
       <!-- Cron used to check all system coherence, including database optimization -->
       <cron:systemCheck active="true" schedule="0 30 23 ? * *"/>
    </crons>
@@ -83,7 +84,7 @@
             <network:classifier>
                <network:includes>
                   <network:include>
-                     <network:userEmailPattern>.*@gael.fr</network:userEmailPattern>
+                     <network:userEmailPattern>.*@xxx.xx</network:userEmailPattern>
                   </network:include>
                </network:includes>
             </network:classifier>
@@ -117,7 +118,7 @@
             <network:classifier>
                <network:includes>
                   <network:include>
-                     <network:userEmailPattern>.*@gael.fr</network:userEmailPattern>
+                     <network:userEmailPattern>.*@xxx.xx</network:userEmailPattern>
                   </network:include>
                </network:includes>
             </network:classifier>
@@ -230,7 +231,7 @@
          field is not set, DHuS is using support mail.
          These values are used only at first launch of the system.
          They shall be modified in Management Panel if needed. -->
-      <system:support name="DHuS Support Team" mail="dhus@gael.fr" registrationMail="dhus@gael.fr" />
+      <system:support name="DHuS Support Team" mail="dhus@xxx.xx" registrationMail="dhus@xxx.xx" />i
       <!-- Definition of tomcat path -->
       <system:tomcat path="&varFolder;/tomcat" />
       <!-- Executor (background service that executes synchronizers)
@@ -348,7 +349,69 @@
                 </sync:source>
             </sync:sources>
         </sync:synchronizer>
+        
+        <!-- Product synchronizer -->
+        <!-- retriesForSkippedProducts: number of retries for each skipped product -->
+        <!-- timeoutSkippedProducts:  timeout in milliseconds of each request of synchronization for skipped products-->
+        <sync:synchronizer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="sync:productSynchronizer"
+        retriesForSkippedProducts="5" timeoutSkippedProducts="30000" retryingSourceDelay="30">
+            <sync:id>0</sync:id>
+            <sync:label>sync</sync:label>
+            <sync:schedule>0 */3 * ? * *</sync:schedule>
+            <sync:active>false</sync:active>
+            <sync:created>2022-05-25T17:11:51.173Z</sync:created>
+            <sync:modified>2022-05-25T17:30:53.781Z</sync:modified>
+            <sync:pageSize>26</sync:pageSize>
+            <sync:copyProduct>true</sync:copyProduct>
+            <sync:skipOnError>true</sync:skipOnError>
+            <sync:syncOfflineProducts>true</sync:syncOfflineProducts>
+            <!-- Used for multisources sync. Schedule to process ranking between sources -->
+            <sync:rankingSchedule>0 */2 * ? * *</sync:rankingSchedule>
+            <sync:targetCollection>existingCollectionName</sync:targetCollection>
+            <sync:filterParam>startswith(Name,'S2')</sync:filterParam>
+            <sync:sources>
+                <sync:source>
+                    <sync:referenceId>1</sync:referenceId>
+                    <sync:lastCreationDate>2022-05-20T06:56:55.315Z</sync:lastCreationDate>
+                    <sync:lastDateSourceUsed>2022-06-27T13:56:55.315Z</sync:lastDateSourceUsed>
+                </sync:source>
+                <sync:source>
+                    <sync:referenceId>3</sync:referenceId>
+                    <sync:lastCreationDate>2022-05-20T06:56:45.315Z</sync:lastCreationDate>
+                </sync:source>
+                <sync:source>
+                    <sync:referenceId>2</sync:referenceId>
+                    <sync:lastCreationDate>2022-05-20T07:00:35.514Z</sync:lastCreationDate>
+                </sync:source>
+            </sync:sources>
+        </sync:synchronizer>
    </synchronizers>
+   
+   <!-- Product sources -->
+   <productSources>
+        <ps:productSource>
+            <ps:id>1</ps:id>
+            <ps:url>https://server1.url/odata/v1/Products</ps:url>
+            <ps:login>login_user1</ps:login>
+            <ps:password>p4ssword1</ps:password>
+            <ps:listable>true</ps:listable>
+        </ps:productSource>
+        <ps:productSource>
+            <ps:id>2</ps:id>
+            <ps:url>https://server2.url/odata/v1/Products</ps:url>
+            <ps:login>login_user2</ps:login>
+            <ps:password>p4ssword2</ps:password>
+            <ps:listable>true</ps:listable>
+        </ps:productSource>
+        <ps:productSource>
+            <ps:id>0</ps:id>
+            <ps:url>https://server3/odata/v1</ps:url>
+            <ps:login>login_user3</ps:login>
+            <ps:password>p4ssword3</ps:password>
+            <ps:remoteIncoming>/my/directory/for/products</ps:remoteIncoming>
+            <ps:listable>true</ps:listable>
+        </ps:productSource>
+   </productSources>
    <evictions>
        <!-- Eviction configurations.
           name: name of the eviction
